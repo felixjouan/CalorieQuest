@@ -7,12 +7,12 @@ import niveau3 from "/src/js/niveau3.js";
 // configuration générale du jeu
 var config = {
   type: Phaser.AUTO,
-  width: 800, // largeur en pixels
+  width: 800, // largeur en pixels              
   height: 600, // hauteur en pixels
    scale: {
         // Or set parent divId here
         mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH
+        autoCenter: Phaser.Scale.CENTER_BOTH// BJCDJSJBJDHVUHUVUHVHUFuyhiygtkjnuhy
    },
   physics: {
     // définition des parametres physiques
@@ -31,4 +31,3 @@ var config = {
 // création et lancement du jeu
 var game = new Phaser.Game(config);
 game.scene.start("selection");
-//coucou
