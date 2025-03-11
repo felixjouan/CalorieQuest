@@ -51,8 +51,9 @@ export default class selection extends Phaser.Scene {
     this.load.image("img_porte2", "src/assets/door2.png");
     this.load.image("img_porte3", "src/assets/door3.png");
 
-    this.load.image("img_salada", "src/assets/salada.png");
-    this.load.image("img_carotte", "src/assets/carrot.png");
+    this.load.image("img_salada", "src/assets/food/salada.png");
+    this.load.image("img_carotte", "src/assets/food/carrot.png");
+    this.load.image("img_burger", "src/assets/food/burger.png");
   }
 
   /***********************************************************************/
@@ -234,7 +235,19 @@ export default class selection extends Phaser.Scene {
 
     this.physics.add.overlap(player, groupe_carrots, ramasserCarotte, null , this); //enlève le corps de la carotte
 
+    groupe_burger = this.physics.add.group();
     
+    //ajoute la physique aux burgers
+    for (var i = 0; i < 10; i++) {
+      var coordX = 70 + 70 * i;
+      groupe_salades.create(coordX, 10, "img_burger");
+    } 
+    this.physics.add.collider(groupe_burger, groupe_plateformes); // ajoute les collisions entre les burgers et les plateformes
+    groupe_burger.children.iterate(function iterateur(burger_i) {
+    // On tire un coefficient aléatoire de rerebond : valeur entre 0.4 et 0.8
+    var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+    burger_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au burger burger_i
+    }); 
 
   }//fin de la fonction create
 
