@@ -1,4 +1,5 @@
 // chargement des librairies
+//import Phaser from "phaser";
 import selection from "/src/js/selection.js";
 import niveau1 from "/src/js/scene/niveau1.js";
 import niveau2 from "/src/js/scene/niveau2.js";
