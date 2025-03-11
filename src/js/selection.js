@@ -1,4 +1,3 @@
-import * as fct from "/src/js/main/fonctions.js";
 
 /***********************************************************************/
 /** VARIABLES GLOBALES 

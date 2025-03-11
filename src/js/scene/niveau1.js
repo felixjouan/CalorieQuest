@@ -1,4 +1,3 @@
-import * as fct from "/src/js/fonctions.js";
 
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
