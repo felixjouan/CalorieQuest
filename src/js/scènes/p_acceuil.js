@@ -1,11 +1,11 @@
-export default class p_acceuil extends Phaser.scènes {
+export default class p_acceuil extends Phaser.Scene {
     constructor() {
       super({ key: "menu" });
     }
     //on charge les images
     preload() {
-      this.load.image("menu_fond", "assets/imagemario.jpg");
-      this.load.image("imageBoutonPlay", "assets/play-button.png");
+      this.load.image("menu_fond", "/src/assets/imagemario.jpg");
+      this.load.image("imageBoutonPlay", "/src/assets/play-button.png");
     }
   
     create() {
