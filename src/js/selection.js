@@ -282,8 +282,8 @@ export default class selection extends Phaser.Scene {
       score -= 50 ;
     }//fin de la fonction ramasserBurger
     this.physics.add.overlapp(player, groupe_burgers,ramasserBurger, null, this) ;
-
-
+  
+  
   }//fin de la fonction create
 
   /***********************************************************************/
