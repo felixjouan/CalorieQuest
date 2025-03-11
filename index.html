@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Mon premier jeu en Phaser 3</title>
-    <meta charset="UTF-8" />
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser-arcade-physics.min.js"></script>
-  </head>
-
-  <body>
-    <script src="src/index.js" type="module"></script>
-  </body>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalorieQuest</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+</head>
+<body>
+    <!-- Importe les fichiers JS dans le bon ordre -->
+    <script src="src/js/scenes/p_acceuil.js"></script>  <!-- Page d'accueil -->
+    <script src="src/js/scenes/Selection.js"></script>
+    <script src="src/js/scenes/Niveau1.js"></script>
+    <script src="src/js/main.js"></script>  <!-- Doit être chargé en dernier -->
+</body>
 </html>
