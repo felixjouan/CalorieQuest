@@ -5,7 +5,7 @@ class menu extends Phaser.Scene {
     //on charge les images
     preload() {
       this.load.image("menu_fond", "assets/imagemario.jpg");
-      this.load.image("imageBoutonPlay", "assets/play-button");
+      this.load.image("imageBoutonPlay", "assets/play-button.png");
     }
   
     create() {
@@ -24,12 +24,18 @@ class menu extends Phaser.Scene {
   
       //Cas ou la souris passe sur le bouton play
       bouton_play.on("pointerover", () => {
-        ....
+        bouton_play.setScale(1.2);
+        this.tweens.add({
+          targets: bouton_play,
+          x: bouton_play.x + 5, // Bouge un peu à droite
+          yoyo: true, // Revient à sa position initiale
+          duration: 100
+      });
       });
       
       //Cas ou la souris ne passe plus sur le bouton play
       bouton_play.on("pointerout", () => {
-      ...
+        bouton_play.setScale(1);
       });
   
   
