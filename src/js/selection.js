@@ -8,6 +8,22 @@ var player; // désigne le sprite du joueur coucou la zone
 var clavier; // pour la gestion du clavier
 var groupe_plateformes;
 
+let keyQ;
+let keyD;
+let keyZ;
+
+var groupe_salades ;
+var zone_texte_score  ; //variable pour afficher le score 
+var score = 0;
+
+var speed = 160 ; //variable pour changer la vitesse de déplacement du personnage
+var speedjump = 330 ; //variable de la vitesse de saut 
+
+var groupe_carrots ; //groupe qui va contenir les carottes 
+var groupe_coca ; 
+var groupe_banane ; 
+var groupe_burger ; 
+
 // définition de la classe "selection"
 export default class selection extends Phaser.Scene {
   constructor() {
@@ -30,9 +46,13 @@ export default class selection extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 48
     });
+    this.load.image("img_bombe" , "src/assets/bomb.png" );
     this.load.image("img_porte1", "src/assets/door1.png");
     this.load.image("img_porte2", "src/assets/door2.png");
     this.load.image("img_porte3", "src/assets/door3.png");
+
+    this.load.image("img_salada", "src/assets/salada.png");
+    this.load.image("img_carotte", "src/assets/carrot.png");
   }
 
   /***********************************************************************/
@@ -134,13 +154,82 @@ export default class selection extends Phaser.Scene {
     // ceci permet de creer un clavier et de mapper des touches, connaitre l'état des touches
     clavier = this.input.keyboard.createCursorKeys();
 
+    keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+    keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+
     /*****************************************************
      *  GESTION DES INTERATIONS ENTRE  GROUPES ET ELEMENTS *
      ******************************************************/
 
     //  Collide the player and the groupe_etoiles with the groupe_plateformes
     this.physics.add.collider(player, groupe_plateformes);
-  }
+
+    groupe_salades = this.physics.add.group();
+    //ajoute la physique aux salades 
+    for (var i = 0; i < 10; i++) {
+      var coordX = 70 + 70 * i;
+      groupe_salades.create(coordX, 10, "img_salada");
+    } 
+    this.physics.add.collider(groupe_salades, groupe_plateformes); // ajoute les collisions entre les étoiles et les plateformes
+    groupe_salades.children.iterate(function iterateur(salade_i) {
+    // On tire un coefficient aléatoire de rerebond : valeur entre 0.4 et 0.8
+    var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+    salade_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond à l'étoile etoile_i
+    }); 
+
+    function ramasserSalade(un_player, une_salade){
+      une_salade.disableBody(true,true) ;
+      //On désactive lme corps physique de la salade mais aussi sa texture
+
+      // deux élement qui se sont superposés : le player, et la salade en question
+      // les actions à entreprendre seront écrites dans la fonction ramasserSalade
+      //this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);
+
+      // on regarde le nombre de salades qui sont encore actives (non ramassées)
+      if (groupe_salades.countActive(true) === 0) {
+      // si ce nombre est égal à 0 : on va réactiver toutes les étoiles désactivées
+      // pour chaque salade salade_i du groupe, on réacttive salade_i avec la méthode enableBody
+      // ceci s'ecrit bizarrement : avec un itérateur sur les enfants (children) du groupe (equivalent du for)
+      groupe_salades.children.iterate(function iterateur(salade_i) {
+      salade_i.enableBody(true, salade_i.x, 0, true, true);
+      });
+      }//fin du if()
+
+      score += 10; // A chaque fois que la fonction est exécutée le score est incrémenté de 10 
+      zone_texte_score.setText("Score: " + score); //Affichage du score 
+    }//fin de la fonction rammasserSalade
+
+    this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);  //Enlève le corps de la salade
+    zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' }); //placement du score à ces coordonnées
+
+    groupe_carrots = this.physics.add.group();
+    this.physics.add.collider(groupe_carrots, groupe_plateformes); // ajoute les collisions entre les carottes et les plateformes
+  
+    var une_carotte = groupe_carrots.create(100, 16, "img_carotte");
+    une_carotte.setBounce(1);
+    une_carotte.setCollideWorldBounds(true);
+    une_carotte.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    une_carotte.allowGravity = false;
+
+
+    function ramasserCarotte(un_player, une_carotte){ //fonction pour ramasser les carottes
+      une_carotte.disableBody(true,true); //enlève la texture de la carotte
+
+      speedjump = 5 * speedjump ; //on double la vitesse de saut
+      //setTimeout(speedjump=speedjump/10 , 500000) ;
+
+      setTimeout(() => {
+        speedjump = speedjump/5;
+      }, 5000); // 5000 pour  secondes
+      //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
+
+    }//fin de la fonction ramasserCarotte
+
+    this.physics.add.overlap(player, groupe_carrots, ramasserCarotte, null , this); //enlève le corps de la carotte
+
+
+  }//fin de la fonction create
 
   /***********************************************************************/
   /** FONCTION UPDATE 
@@ -148,20 +237,37 @@ export default class selection extends Phaser.Scene {
 
   update() {
     
-    if (clavier.left.isDown) {
-      player.setVelocityX(-160);
-      player.anims.play("anim_tourne_gauche", true);
-    } else if (clavier.right.isDown) {
-      player.setVelocityX(160);
-      player.anims.play("anim_tourne_droite", true);
-    } else {
+    if (clavier.right.isDown == true) { //Si on appuie sur la flèche droite, on a une vitesse de 160 pixel par seconde 
+      player.setVelocityX(speed);
+      player.anims.play('anim_tourne_droite', true); //l'animation du sprite
+    } 
+    else if (clavier.left.isDown == true) { //Si on appuie sur la flèche gauche, on a une vitesse de 160 pixel par seconde 
+      player.setVelocityX(-speed);
+      player.anims.play('anim_tourne_gauche', true); //l'animation du sprite
+    } 
+    else if (keyQ.isDown == true ){ //Pour la touche Q 
+      player.setVelocityX(-speed);
+      player.anims.play('anim_tourne_gauche', true); //l'animation du sprite
+    }
+    else if (keyD.isDown == true ){ //Pour la touche D
+      player.setVelocityX(speed);
+      player.anims.play('anim_tourne_droite', true); //l'animation du sprite
+    }
+    else {
       player.setVelocityX(0);
-      player.anims.play("anim_face");
+      player.anims.play('anim_rester_droit');
     }
+    if (clavier.up.isDown == true && player.body.touching.down) { //pour la flèche du haut
+      player.setVelocityY(-speedjump) /*appliquer une velocite de -speedjump verticalement*/
+    }
+    if (keyZ.isDown == true && player.body.touching.down) { //pour la touche Z
+      player.setVelocityY(-speedjump) //appliquer une velocite de -speedjump verticalement
+    }
+    /*else {
+      player.setVelocityX(0)
+      player.anims.play('anim_rester_droit');
+    }*/
 
-    if (clavier.up.isDown && player.body.touching.down) {
-      player.setVelocityY(-330);
-    }
 
     if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) {
       if (this.physics.overlap(player, this.porte1))
