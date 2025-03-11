@@ -168,6 +168,10 @@ export default class selection extends Phaser.Scene {
     //  Collide the player and the groupe_etoiles with the groupe_plateformes
     this.physics.add.collider(player, groupe_plateformes);
 
+/**************************************************
+     * CREATION DES ALIMENTS*
+ **************************************************/
+
     groupe_salades = this.physics.add.group();
     //ajoute la physique aux salades 
     for (var i = 0; i < 10; i++) {
@@ -235,7 +239,11 @@ export default class selection extends Phaser.Scene {
     //ajoute la physique aux burgers
     for (var i = 0; i < 10; i++) {
       var coordX = 70 + 70 * i;
+<<<<<<< HEAD
       groupe_burgers.create(coordX, 10, "img_burger");
+=======
+      groupe_burger.create(coordX, 10, "img_burger");
+>>>>>>> 29bc2f6643a8242d92fd0d1e636c579255d12683
     } 
     this.physics.add.collider(groupe_burgers, groupe_plateformes); // ajoute les collisions entre les burgers et les plateformes
     groupe_burgers.children.iterate(function iterateur(burger_i) {
