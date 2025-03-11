@@ -1,3 +1,4 @@
+import * as fct from "/src/js/fonctions.js";
 
 /***********************************************************************/
 /** VARIABLES GLOBALES 
@@ -14,14 +15,16 @@ let keyZ;
 var groupe_salades ;
 var zone_texte_score  ; //variable pour afficher le score 
 var score = 0;
+var gameOver = false ; 
 
 var speed = 160 ; //variable pour changer la vitesse de déplacement du personnage
 var speedjump = 330 ; //variable de la vitesse de saut 
 
 var groupe_carrots ; //groupe qui va contenir les carottes 
-var groupe_coca ; 
+var groupe_sodas ; 
 var groupe_bananes ; 
 var groupe_burgers ; 
+var groupe_redbulls ;
 
 // définition de la classe "selection"
 export default class selection extends Phaser.Scene {
@@ -39,21 +42,21 @@ export default class selection extends Phaser.Scene {
    */
   preload() {
     // tous les assets du jeu sont placés dans le sous-répertoire src/assets/
-    this.load.image("img_ciel", "/src/assets/image/sky.png");
-    this.load.image("img_plateforme", "/src/assets/image/platform.png");
-    this.load.spritesheet("img_perso", "/src/assets/image/dude.png", {
+    this.load.image("img_ciel", "src/assets/sky.png");
+    this.load.image("img_plateforme", "src/assets/platform.png");
+    this.load.spritesheet("img_perso", "src/assets/dude.png", {
       frameWidth: 32,
       frameHeight: 48
     });
-  
-    this.load.image("img_porte1", "/src/assets/image/door1.png");
-    this.load.image("img_porte2", "/src/assets/image/door2.png");
-    this.load.image("img_porte3", "/src/assets/image/door3.png");
+    this.load.image("img_bombe" , "src/assets/bomb.png" );
+    this.load.image("img_porte1", "src/assets/door1.png");
+    this.load.image("img_porte2", "src/assets/door2.png");
+    this.load.image("img_porte3", "src/assets/door3.png");
 
-    this.load.image("img_salada", "/src/assets/image/food/salada.png");
-    this.load.image("img_carotte", "/src/assets/image/food/carrot.png");
-    this.load.image("img_burger", "/src/assets/image/food/burger.png");
-    this.load.image("img_banane","/src/assets/image/food/banana.png");
+    this.load.image("img_salada", "src/assets/food/salada.png");
+    this.load.image("img_carotte", "src/assets/food/carrot.png");
+    this.load.image("img_burger", "src/assets/food/burger.png");
+    this.load.image("img_banane","src/assets/food/banana.png");
 
   }
 
@@ -68,8 +71,9 @@ export default class selection extends Phaser.Scene {
    * ainsi que toutes les instructions permettant de planifier des evenements
    */
   create() {
-     // fct.doNothing();
-     // fct.doAlsoNothing();
+      //fct.doNothing();
+      fct.doAlsoNothing();
+
     /*************************************
      *  CREATION DU MONDE + PLATEFORMES  *
      *************************************/
@@ -250,6 +254,11 @@ export default class selection extends Phaser.Scene {
 
     groupe_bananes = this.physics.add.group();
     this.physics.add.collider(groupe_bananes, groupe_plateformes); // ajoute les collisions entre les carottes et les plateformes
+    groupe_sodas = this.physics.add.group() ;
+    this.physics.add.collider(groupe_sodas, groupe_plateformes);
+    groupe_redbulls = this.physics.add.group();
+    this.physics.add.collider(groupe_redbulls,groupe_plateformes);
+
   
     var une_banane = groupe_bananes.create(100, 16, "img_banane") ;
     une_banane.setBounce(1) ;
@@ -267,7 +276,7 @@ export default class selection extends Phaser.Scene {
       score += 20 ;
 
     }//fin de la fonction ramasserBanane
-    this.physics.add.overlap(player, groupe_bananes, ramasserBanane, null , this); //enlève le corps de la banane
+    this.physics.add.overlap(player, groupe_bananes, ramasserBanane, null , this); //enlève le corps de la banane en appelant la fonction
 
     function ramasserBurger(un_player, un_burger){ //fonction pour ramasser les burgers
       un_burger.disableBody(true,true); //enlève la texture du burger
@@ -279,9 +288,36 @@ export default class selection extends Phaser.Scene {
       //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
       score -= 50 ;
     }//fin de la fonction ramasserBurger
-    this.physics.add.overlapp(player, groupe_burgers,ramasserBurger, null, this) ;
-  
-  
+    this.physics.overlap(player, groupe_burgers, ramasserBurger, null , this) ; 
+    //enlève le corps des burgers avec l'invocation de la fonction 
+
+
+    function ramasserSoda(un_player, un_soda){ //fonction pour ramasser les sodas
+      un_burger.disableBody(true,true); //enlève la texture du soda
+      speed = 0.5*speed ; //on divise par 2 la vitesse de déplacement
+      setTimeout(() => {
+        speed = speed*2;
+      }, 5000); // 5000 pour  secondes
+      //La variable speed ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
+      score -= 50 ;
+    }//fin de la fonction ramasserBurger
+    this.physics.add.overlapp(player, groupe_sodas,ramasserSoda, null, this) ;
+
+
+    function ramasserRedbull(un_player, un_redbull){
+      un_redbull.disableBody(true,true);
+      un_player.setVelocityY(-1500);
+      speedjump = 0.3 * speedjump ;
+      setTimeout(() => {
+        speedjump = 10*speedjump ;
+        speedjump = speedjump / 3 ;
+      }, 5000);
+      score -= 1000
+      //La variable speedjump remise à sa valeur initiale au bout d'une certaine durée 
+    }//fin de la fonction ramasserRedbull
+    this.physics.add.overlapp(player, groupe_redbulls, ramasserRedbull, null, this);
+
+
   }//fin de la fonction create
 
   /***********************************************************************/
@@ -316,10 +352,12 @@ export default class selection extends Phaser.Scene {
     if (keyZ.isDown == true && player.body.touching.down) { //pour la touche Z
       player.setVelocityY(-speedjump) //appliquer une velocite de -speedjump verticalement
     }
-    /*else {
-      player.setVelocityX(0)
-      player.anims.play('anim_rester_droit');
-    }*/
+    if (score <= -1000){
+      gameOver = true ; 
+    }
+    if(gameOver){
+      return ; //met gameOver à true 
+    }
 
 
     if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) {
