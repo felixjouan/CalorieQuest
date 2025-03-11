@@ -21,8 +21,8 @@ var speedjump = 330 ; //variable de la vitesse de saut
 
 var groupe_carrots ; //groupe qui va contenir les carottes 
 var groupe_coca ; 
-var groupe_banane ; 
-var groupe_burger ; 
+var groupe_bananes ; 
+var groupe_burgers ; 
 
 // définition de la classe "selection"
 export default class selection extends Phaser.Scene {
@@ -53,6 +53,7 @@ export default class selection extends Phaser.Scene {
 
     this.load.image("img_salada", "src/assets/salada.png");
     this.load.image("img_carotte", "src/assets/carrot.png");
+    this.load.image("img_banane","src/assets/carrot.png");
   }
 
   /***********************************************************************/
@@ -178,6 +179,7 @@ export default class selection extends Phaser.Scene {
     salade_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond à l'étoile etoile_i
     }); 
 
+
     function ramasserSalade(un_player, une_salade){
       une_salade.disableBody(true,true) ;
       //On désactive lme corps physique de la salade mais aussi sa texture
@@ -185,7 +187,6 @@ export default class selection extends Phaser.Scene {
       // deux élement qui se sont superposés : le player, et la salade en question
       // les actions à entreprendre seront écrites dans la fonction ramasserSalade
       //this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);
-
       // on regarde le nombre de salades qui sont encore actives (non ramassées)
       if (groupe_salades.countActive(true) === 0) {
       // si ce nombre est égal à 0 : on va réactiver toutes les étoiles désactivées
@@ -199,6 +200,7 @@ export default class selection extends Phaser.Scene {
       score += 10; // A chaque fois que la fonction est exécutée le score est incrémenté de 10 
       zone_texte_score.setText("Score: " + score); //Affichage du score 
     }//fin de la fonction rammasserSalade
+
 
     this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);  //Enlève le corps de la salade
     zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' }); //placement du score à ces coordonnées
@@ -215,18 +217,37 @@ export default class selection extends Phaser.Scene {
 
     function ramasserCarotte(un_player, une_carotte){ //fonction pour ramasser les carottes
       une_carotte.disableBody(true,true); //enlève la texture de la carotte
-
       speedjump = 5 * speedjump ; //on double la vitesse de saut
       //setTimeout(speedjump=speedjump/10 , 500000) ;
-
       setTimeout(() => {
         speedjump = speedjump/5;
       }, 5000); // 5000 pour  secondes
       //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
-
+      score += 50 ;
     }//fin de la fonction ramasserCarotte
 
     this.physics.add.overlap(player, groupe_carrots, ramasserCarotte, null , this); //enlève le corps de la carotte
+
+    groupe_banane = this.physics.add.group() ;
+    this.physics.add.collider(groupe_banane, groupe_plateformes) ;//ajoute les collisions
+
+    var une_banane = groupe_bananes.create(200, 16, "img_banane");
+    une_banane.setBounce(1);
+    une_banane.setCollideWorldBounds(true);
+    une_banane.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    une_banane.allowGravity = false;
+
+
+    function ramasserBanane(un_player, une_banane){ //fonction pour ramasser des bananes 
+      une_carotte.disableBody(true,true) ;
+      speed = 5 * speed ;
+      setTimeout(() => {
+        speed = speed/5;
+      }, 8000); // 5000 pour secondes
+      score += 20 ;
+    }//fin de la fonction ramasserBanane
+    this.physics.add.overlap(player, groupe_bananes, ramasserBanane, null , this); //enlève le corps de la banane
+
 
 
   }//fin de la fonction create
