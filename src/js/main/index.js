@@ -1,9 +1,9 @@
 // chargement des librairies
 import selection from "/src/js/selection.js";
-import niveau1 from "/src/js/scènes/niveau1.js";
-import niveau2 from "/src/js/scènes/niveau2.js";
-import niveau3 from "/src/js/scènes/niveau3.js";
-import p_acceuil from "/src/scènes/js/p_acceuil.js";
+import niveau1 from "/src/js/scene/niveau1.js";
+import niveau2 from "/src/js/scene/niveau2.js";
+import niveau3 from "/src/js/scene/niveau3.js";
+import p_acceuil from "/src/scene/js/p_acceuil.js";
 
 // configuration générale du jeu
 var config = {

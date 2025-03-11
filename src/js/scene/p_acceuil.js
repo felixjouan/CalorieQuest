@@ -1,4 +1,4 @@
-export default class p_acceuil extends Phaser.Scene {
+export default class p_acceuil extends Phaser.scene {
     constructor() {
       super({ key: "menu" });
     }
