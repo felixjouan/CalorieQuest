@@ -67,9 +67,9 @@ export default class selection extends Phaser.Scene {
    * placement des peronnages, des sprites, des platesformes, création des animations
    * ainsi que toutes les instructions permettant de planifier des evenements
    */
-  /create() {
-      fct.doNothing();
-      fct.doAlsoNothing();
+  create() {
+     // fct.doNothing();
+     // fct.doAlsoNothing();
     /*************************************
      *  CREATION DU MONDE + PLATEFORMES  *
      *************************************/
