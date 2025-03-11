@@ -11,8 +11,8 @@ var config = {
   height: 600, // hauteur en pixels
    scale: {
         // Or set parent divId here
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH// BJCDJSJBJDHVUHUVUHVHUFuyhiygtkjnuhy
+        mode: Phaser.Scale.FIT,      
+        autoCenter: Phaser.Scale.CENTER_BOTH// BJCDJSJBJDHVUHUVUHVHUFuyhiygtkjnuhynjcdnshncjls
    },
   physics: {
     // définition des parametres physiques
