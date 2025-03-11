@@ -10,8 +10,8 @@ export default class niveau1 extends Phaser.Scene {
   }
 
   create() {
-    fct.doNothing();
-    fct.doAlsoNothing();
+    //fct.doNothing();
+    //fct.doAlsoNothing();
 
     this.add.image(400, 300, "img_ciel");
     this.groupe_plateformes = this.physics.add.staticGroup();
