@@ -15,5 +15,5 @@ export default class AudioManager {
         sound_elevator=this.scene.sound.add('ascenseur_sound');
         sound_elevator.play();
 
-        //bre
+        
     }
