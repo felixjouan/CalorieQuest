@@ -4,8 +4,8 @@ export default class AudioManager {
     }
 
     preload() {
-        this.scene.load.audio("musique_menu", "assets/son/musique_menu.mp3");
-        this.scene.load.audio("clic_bouton", "assets/son/clic.mp3");
+        this.load.audio("musique_1", "assets/globalmusique.mp3");
+        this.load.audio("ascenseur_sound", "assets/musique_ascenseur.mp3");
     }
 
     create() {
