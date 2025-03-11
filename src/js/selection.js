@@ -170,7 +170,7 @@ export default class selection extends Phaser.Scene {
     this.physics.add.collider(player, groupe_plateformes);
 
 /**************************************************
-     * CREATION DES ALIMENTS*
+     * CREATION ET GESTION DES ALIMENTS*
  **************************************************/
 
     groupe_salades = this.physics.add.group();
