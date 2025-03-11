@@ -1,4 +1,4 @@
-class menu extends Phaser.Scene {
+class p_acceuil extends Phaser.scènes {
     constructor() {
       super({ key: "menu" });
     }
