@@ -100,7 +100,6 @@ export default class selection extends Phaser.Scene {
     });
  
 
-    this.load.image("img_bombe" , "src/assets/image/bomb.png" );
  
 
     
