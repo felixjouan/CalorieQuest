@@ -39,21 +39,21 @@ export default class selection extends Phaser.Scene {
    */
   preload() {
     // tous les assets du jeu sont placés dans le sous-répertoire src/assets/
-    this.load.image("img_ciel", "/src/assets/sky.png");
-    this.load.image("img_plateforme", "/src/assets/platform.png");
-    this.load.spritesheet("img_perso", "/src/assets/dude.png", {
+    this.load.image("img_ciel", "/src/assets/image/sky.png");
+    this.load.image("img_plateforme", "/src/assets/image/platform.png");
+    this.load.spritesheet("img_perso", "/src/assets/image/dude.png", {
       frameWidth: 32,
       frameHeight: 48
     });
   
-    this.load.image("img_porte1", "/src/assets/door1.png");
-    this.load.image("img_porte2", "/src/assets/door2.png");
-    this.load.image("img_porte3", "/src/assets/door3.png");
+    this.load.image("img_porte1", "/src/assets/image/door1.png");
+    this.load.image("img_porte2", "/src/assets/image/door2.png");
+    this.load.image("img_porte3", "/src/assets/image/door3.png");
 
-    this.load.image("img_salada", "/src/assets/food/salada.png");
-    this.load.image("img_carotte", "/src/assets/food/carrot.png");
-    this.load.image("img_burger", "/src/assets/food/burger.png");
-    this.load.image("img_banane","/src/assets/food/banana.png");
+    this.load.image("img_salada", "/src/assets/image/food/salada.png");
+    this.load.image("img_carotte", "/src/assets/image/food/carrot.png");
+    this.load.image("img_burger", "/src/assets/image/food/burger.png");
+    this.load.image("img_banane","/src/assets/image/food/banana.png");
 
   }
 
