@@ -41,12 +41,27 @@ function ramasserBurger(un_player, un_burger){ //fonction pour ramasser les burg
 
   function ramasserSoda(un_player, un_soda){ //fonction pour ramasser les sodas
     un_burger.disableBody(true,true); //enlève la texture du soda
-    speedjump = 0.5*speed ; //on divise par 2 la vitesse de déplacement
-    //setTimeout(speedjump=speedjump/10 , 500000) ;
+    speed = 0.5*speed ; //on divise par 2 la vitesse de déplacement
     setTimeout(() => {
-      speedjump = speed*2;
+      speed = speed*2;
     }, 5000); // 5000 pour  secondes
     //La variable speed ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
     score -= 50 ;
   }//fin de la fonction ramasserBurger
   this.physics.add.overlapp(player, groupe_sodas,ramasserSoda, null, this) ;
+
+
+  //**************************************************************************
+  function ramasserRedbull(un_player, un_redbull){
+    un_redbull.disableBody(true,true);
+    un_player.setVelocityY(-1500);
+    speedjump = 0.3 * speedjump ;
+    setTimeout(() => {
+      speedjump = 10*speedjump ;
+      speedjump = speedjump / 3 ;
+    }, 5000);
+    //La variable speedjump remise à sa valeur initiale au bout d'une certaine durée 
+
+
+  }//fin de la fonction ramasserRedbull
+  this.physics.add.overlapp(player, groupe_redbulls, ramasserRedbull, null, this);
