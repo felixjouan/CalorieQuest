@@ -68,8 +68,8 @@ export default class selection extends Phaser.Scene {
    * ainsi que toutes les instructions permettant de planifier des evenements
    */
   create() {
-      fct.doNothing();
-      fct.doAlsoNothing();
+      //fct.doNothing();
+      //fct.doAlsoNothing();
 
     /*************************************
      *  CREATION DU MONDE + PLATEFORMES  *
@@ -280,7 +280,7 @@ export default class selection extends Phaser.Scene {
       //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
       score -= 50 ;
     }//fin de la fonction ramasserBurger
-    this.physics.add.overlapp(player, groupe_burgers,ramasserBurger, null, this) ;
+    this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
   
   
   }//fin de la fonction create
