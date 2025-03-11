@@ -161,6 +161,7 @@ export default class selection extends Phaser.Scene {
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 
+    
     /*****************************************************
      *  GESTION DES INTERATIONS ENTRE  GROUPES ET ELEMENTS *
      ******************************************************/
