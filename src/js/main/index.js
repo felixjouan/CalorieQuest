@@ -1,20 +1,14 @@
 // chargement des librairies
 import selection from "/src/js/selection.js";
-import niveau1 from "/src/js/scènes/niveau1.js";
-import niveau2 from "/src/js/scènes/niveau2.js";
-import niveau3 from "/src/js/scènes/niveau3.js";
-import p_acceuil from "/src/scènes/js/p_acceuil.js";
+import niveau1 from "/src/js/scenes/niveau1.js";
+import niveau2 from "/src/js/scenes/niveau2.js";
+import niveau3 from "/src/js/scenes/niveau3.js";
 
 // configuration générale du jeu
 var config = {
   type: Phaser.AUTO,
-  width: 800, // largeur en pixels              
+  width: 800, // largeur en pixels
   height: 600, // hauteur en pixels
-   scale: {
-        // Or set parent divId here
-        mode: Phaser.Scale.FIT,      
-        autoCenter: Phaser.Scale.CENTER_BOTH// BJCDJSJBJDHVUHUVUHVHUFuyhiygtkjnuhynjcdnshncjls
-   },
   physics: {
     // définition des parametres physiques
     default: "arcade", // mode arcade : le plus simple : des rectangles pour gérer les collisions. Pas de pentes
@@ -26,19 +20,9 @@ var config = {
       debug: true // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
     }
   },
-  scene: [selection, niveau1, niveau2, niveau3,p_acceuil]
+  scene: [selection, niveau1, niveau2, niveau3]
 };
 
 // création et lancement du jeu
 var game = new Phaser.Game(config);
 game.scene.start("selection");
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////
-
-//MANOOOOOOOOOOOOOOOOOOOOOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
-//XRDCTFVYGUBHIJOUYGTFCGVHBJYGUFHBJUYGHBJUYUGHYGTGHGYFGVH
-
-////////////////////////////////////////////////////////////////////////////////////
