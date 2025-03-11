@@ -239,11 +239,7 @@ export default class selection extends Phaser.Scene {
     //ajoute la physique aux burgers
     for (var i = 0; i < 10; i++) {
       var coordX = 70 + 70 * i;
-<<<<<<< HEAD
       groupe_burgers.create(coordX, 10, "img_burger");
-=======
-      groupe_burger.create(coordX, 10, "img_burger");
->>>>>>> 29bc2f6643a8242d92fd0d1e636c579255d12683
     } 
     this.physics.add.collider(groupe_burgers, groupe_plateformes); // ajoute les collisions entre les burgers et les plateformes
     groupe_burgers.children.iterate(function iterateur(burger_i) {
@@ -273,6 +269,18 @@ export default class selection extends Phaser.Scene {
 
     }//fin de la fonction ramasserBanane
     this.physics.add.overlap(player, groupe_bananes, ramasserBanane, null , this); //enlève le corps de la banane
+
+    function ramasserBurger(un_player, un_burger){ //fonction pour ramasser les burgers
+      un_burger.disableBody(true,true); //enlève la texture du burger
+      speedjump = 0.5 speedjump ; //on divise par 2 la vitesse de saut
+      //setTimeout(speedjump=speedjump/10 , 500000) ;
+      setTimeout(() => {
+        speedjump = speedjump*2;
+      }, 5000); // 5000 pour  secondes
+      //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
+      score += 50 ;
+    }//fin de la fonction ramasserBurger
+
 
   }//fin de la fonction create
 
