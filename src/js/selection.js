@@ -229,8 +229,8 @@ export default class selection extends Phaser.Scene {
     }//fin de la fonction ramasserCarotte
 
     this.physics.add.overlap(player, groupe_carrots, ramasserCarotte, null , this); //enlève le corps de la carotte
-
-    groupe_burger = this.physics.add.group();
+    /*
+    groupe_burgers = this.physics.add.group();
     
     //ajoute la physique aux burgers
     for (var i = 0; i < 10; i++) {
@@ -243,6 +243,28 @@ export default class selection extends Phaser.Scene {
     var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
     burger_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au burger burger_i
     }); 
+    */
+
+    groupe_bananes = this.physics.add.group();
+    this.physics.add.collider(groupe_bananes, groupe_plateformes); // ajoute les collisions entre les carottes et les plateformes
+  
+    var une_banane = groupe_bananes.create(100, 16, "img_banane") ;
+    une_banane.setBounce(1) ;
+    une_banane.setCollideWorldBounds(true) ;
+    une_banane.setVelocity(Phaser.Math.Between(-200, 200), 20) ;
+    une_banane.allowGravity = false ;
+
+    function ramasserBanane(un_player, une_banane){
+      une_banane.disableBody(true,true);
+      speed = 5 * speed ; 
+      setTimeout(() => {
+        speed = speed/5;
+      }, 5000); // 5000 pour  millisecondes
+      //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
+      score += 20 ;
+
+    }//fin de la fonction ramasserBanane
+    this.physics.add.overlap(player, groupe_bananes, ramasserBanane, null , this); //enlève le corps de la banane
 
   }//fin de la fonction create
 
