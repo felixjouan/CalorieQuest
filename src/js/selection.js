@@ -235,10 +235,10 @@ export default class selection extends Phaser.Scene {
     //ajoute la physique aux burgers
     for (var i = 0; i < 10; i++) {
       var coordX = 70 + 70 * i;
-      groupe_salades.create(coordX, 10, "img_burger");
+      groupe_burgers.create(coordX, 10, "img_burger");
     } 
-    this.physics.add.collider(groupe_burger, groupe_plateformes); // ajoute les collisions entre les burgers et les plateformes
-    groupe_burger.children.iterate(function iterateur(burger_i) {
+    this.physics.add.collider(groupe_burgers, groupe_plateformes); // ajoute les collisions entre les burgers et les plateformes
+    groupe_burgers.children.iterate(function iterateur(burger_i) {
     // On tire un coefficient aléatoire de rerebond : valeur entre 0.4 et 0.8
     var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
     burger_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au burger burger_i
