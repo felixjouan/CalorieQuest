@@ -22,8 +22,8 @@ function ramasserBurger(un_player, un_burger){ //fonction pour ramasser les burg
     }, 5000); // 5000 pour  secondes
     //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
     score -= 50 ;
-  }//fin de la fonction ramasserBurger
-  this.physics.add.overlapp(player, groupe_burgers,ramasserBurger, null, this) ;
+}//fin de la fonction ramasserBurger
+this.physics.add.overlapp(player, groupe_burgers,ramasserBurger, null, this) ;
 
 
 
