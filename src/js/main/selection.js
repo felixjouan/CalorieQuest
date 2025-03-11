@@ -165,6 +165,12 @@ export default class selection extends Phaser.Scene {
     //  Collide the player and the groupe_etoiles with the groupe_plateformes
     this.physics.add.collider(player, groupe_plateformes);
 
+
+    /***************************************************
+     * CREATION DES ALIMENTS *
+     ****************************************************/
+
+
     groupe_salades = this.physics.add.group();
     //ajoute la physique aux salades 
     for (var i = 0; i < 10; i++) {
@@ -228,6 +234,7 @@ export default class selection extends Phaser.Scene {
 
     this.physics.add.overlap(player, groupe_carrots, ramasserCarotte, null , this); //enlève le corps de la carotte
 
+    
 
   }//fin de la fonction create
 
