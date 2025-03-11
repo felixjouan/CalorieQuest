@@ -159,12 +159,17 @@ export default class selection extends Phaser.Scene {
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 
+    
     /*****************************************************
      *  GESTION DES INTERATIONS ENTRE  GROUPES ET ELEMENTS *
      ******************************************************/
 
     //  Collide the player and the groupe_etoiles with the groupe_plateformes
     this.physics.add.collider(player, groupe_plateformes);
+
+/**************************************************
+     * CREATION DES ALIMENTS*
+ **************************************************/
 
     groupe_salades = this.physics.add.group();
     //ajoute la physique aux salades 
@@ -233,7 +238,7 @@ export default class selection extends Phaser.Scene {
     //ajoute la physique aux burgers
     for (var i = 0; i < 10; i++) {
       var coordX = 70 + 70 * i;
-      groupe_salades.create(coordX, 10, "img_burger");
+      groupe_burger.create(coordX, 10, "img_burger");
     } 
     this.physics.add.collider(groupe_burger, groupe_plateformes); // ajoute les collisions entre les burgers et les plateformes
     groupe_burger.children.iterate(function iterateur(burger_i) {
