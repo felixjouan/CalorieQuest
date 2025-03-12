@@ -868,13 +868,14 @@ this.physics.add.overlap(player, groupe_redbulls, ramasserRedbull, null, this);
  
     if (score <= -1000){
  
-      gameOver = true ; 
+      gameOver = true ; //met gameOver à true 
+      this.physics.pause() ;
  
     }
  
     if(gameOver){
  
-      return ; //met gameOver à true 
+      return ; 
  
     }
  
@@ -898,7 +899,7 @@ this.physics.add.overlap(player, groupe_redbulls, ramasserRedbull, null, this);
  
     }
  
-  }
+  } // fin de la fonctoin update
  
 }
  
