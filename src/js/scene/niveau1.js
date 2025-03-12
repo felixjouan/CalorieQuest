@@ -17,9 +17,9 @@ export default class niveau1 extends Phaser.Scene {
     this.load.tilemapTiledJSON("map1a", "src/assets/image/map1a.tmj");
 
     // chargement du personnage dude
-    this.load.spritesheet("dude", "src/assets/image/dude.png", {
-      frameWidth: 32,
-      frameHeight: 48
+    this.load.spritesheet("dude", "src/assets/image/ptitgars.png", {
+      frameWidth: 184,
+      frameHeight: 275
     });
   }
 
@@ -53,7 +53,7 @@ this.portes.create(600, 550, "portail");
 
     plateforme.setCollisionByProperty({ estSolide: true });
 
-    this.player = this.physics.add.sprite(100, 450, "img_perso");
+    this.player = this.physics.add.sprite(100, 450, "dude");
     // Ajuster la boîte de collision du joueur pour de meilleurs déplacements
     this.player.body.setSize(this.player.width * 0.7, this.player.height * 0.95);
     this.player.body.setOffset(5, 2);
@@ -75,21 +75,21 @@ this.portes.create(600, 550, "portail");
     // Animations du joueur
     this.anims.create({
       key: "anim_tourne_droite",
-      frames: this.anims.generateFrameNumbers("dude", { start: 5, end: 8 }),
+      frames: this.anims.generateFrameNumbers("dude", { start: 12, end: 15 }),
       frameRate: 10,
       repeat: -1
     });
 
     this.anims.create({
       key: "anim_tourne_gauche",
-      frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 3 }),
+      frames: this.anims.generateFrameNumbers("dude", { start: 8, end: 11 }),
       frameRate: 10,
       repeat: -1
     });
 
     this.anims.create({
       key: "anim_face",
-      frames: [{ key: "dude", frame: 4 }],
+      frames: [{ key: "dude", frame: 0 }],
       frameRate: 20
     });
 
