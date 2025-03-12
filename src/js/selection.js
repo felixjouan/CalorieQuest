@@ -31,6 +31,7 @@ var groupe_salades ;
 var zone_texte_score  ; //variable pour afficher le score ()
  
 var score = 0;
+var zone_wasted
  
 var gameOver = false ; 
  
@@ -511,13 +512,14 @@ function getRandomInt(max) {
  
     this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);  //Enlève le corps de la salade
  
-    function ramasserPomme(un_player, une_pomme){ //fonction pour ramasser les carottes
+
+    function ramasserPomme(un_player, une_pomme){ //fonction pour ramasser les pommes
  
-      une_pomme.disableBody(true,true); //enlève la texture de la carotte
+      une_pomme.disableBody(true,true); //enlève la texture de la pomme
  
       score += 40 ;
  
-    }//fin de la fonction ramasserCarotte
+    }//fin de la fonction ramasserPomme
  
 
  
@@ -797,7 +799,7 @@ function ramasserBurger(un_player, un_burger){ //fonction pour ramasser les burg
     //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
  
 
-    score -= 50 ;
+    score -= 20 ;
  
 
 }//fin de la fonction ramasserBurger
@@ -877,7 +879,7 @@ this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
     }
  
     if (score <= -1000){
- 
+      zone_texte_wasted = this.add.text(160, 160, 'Vous avez fait un infarctus', { fontSize: '128px', fill: '#000' });
       gameOver = true ; 
  
     }
@@ -888,9 +890,6 @@ this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
  
     }
  
-
- 
-
  
     if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) {
  
@@ -906,9 +905,9 @@ this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
  
         this.scene.switch("niveau3");
  
-    }
+    }//fin du if
  
-  }
+  }//fin de la fonction update
  
 }
  
