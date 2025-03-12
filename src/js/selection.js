@@ -206,15 +206,15 @@ export default class selection extends Phaser.Scene {
 
  
 
-    this.load.spritesheet("img_perso", "src/assets/image/dude.png", {
+    this.load.spritesheet("img_perso", "src/assets/image/ptitgars.png", {
 
  
 
-      frameWidth: 32,
+      frameWidth: 184,
 
  
 
-      frameHeight: 48
+      frameHeight: 275
 
  
 
@@ -429,9 +429,9 @@ export default class selection extends Phaser.Scene {
 
       frames: this.anims.generateFrameNumbers("img_perso", {
 
-        start: 0,
+        start: 8,
 
-        end: 3
+        end: 11
 
       }), // on prend toutes les frames de img perso numerotées de 0 à 3
 
@@ -452,7 +452,7 @@ export default class selection extends Phaser.Scene {
 
       key: "anim_rester_droit",
 
-      frames: [{ key: "img_perso", frame: 4 }],
+      frames: [{ key: "img_perso", frame: 0 }],
 
       frameRate: 20
 
@@ -469,9 +469,9 @@ export default class selection extends Phaser.Scene {
 
       frames: this.anims.generateFrameNumbers("img_perso", {
 
-        start: 5,
+        start: 12,
 
-        end: 8
+        end: 15
 
       }),
 
