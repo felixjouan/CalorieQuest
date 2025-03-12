@@ -5,8 +5,6 @@ import niveau1 from "/src/js/scene/niveau1.js";
 import niveau2 from "/src/js/scene/niveau2.js";
 
 
-
-
 // configuration générale du jeu
 var config = {
   type: Phaser.AUTO,
@@ -23,7 +21,7 @@ var config = {
       debug: true // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
     }
   },
-  scene: [p_acceuil,selection, niveau1,niveau2]
+  scene: [selection, niveau1, niveau2, p_acceuil]
 };
 
 // création et lancement du jeu
