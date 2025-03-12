@@ -436,10 +436,10 @@ function spawnItems() {
             groupe_burgers.create(coordX,coordY,'img_burger')
         }
     } //fin du for
-    this.physics.add.collider(groupe_salades, groupe_plateformes);
-    this.physics.add.collider(groupe_sodas, groupe_plateformes);
-    this.physics.add.collider(groupe_burgers, groupe_plateformes);//
-    this.physics.add.collider(groupe_pommes, groupe_plateformes);
+    //this.physics.add.collider(groupe_salades, groupe_plateformes);
+    //this.physics.add.collider(groupe_sodas, groupe_plateformes);
+    //this.physics.add.collider(groupe_burgers, groupe_plateformes);//
+    //this.physics.add.collider(groupe_pommes, groupe_plateformes);
 
     groupe_salades.children.iterate(function(salade_i) {
         var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);      
