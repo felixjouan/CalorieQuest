@@ -5,7 +5,6 @@ import niveau1 from "/src/js/scene/niveau1.js";
 import niveau2 from "/src/js/scene/niveau2.js";
 
 
-
 // configuration générale du jeu
 var config = {
   type: Phaser.AUTO,
@@ -27,4 +26,4 @@ var config = {
 
 // création et lancement du jeu
 var game = new Phaser.Game(config);
-game.scene.start("p_acceuil");
+game.scene.start("selection");
