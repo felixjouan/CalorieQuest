@@ -30,10 +30,16 @@ export default class niveau1 extends Phaser.Scene {
       fontSize: "22pt"
     });
 
+<<<<<<< HEAD
     this.player.setCollideWorldBounds(true);
 
     this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte1");
     this.porte_retour = this.physics.add.staticSprite(600,550,"img_porte1");
+=======
+    this.portes = this.physics.add.staticGroup();
+this.portes.create(100, 550, "portail"); 
+this.portes.create(600, 550, "portail"); 
+>>>>>>> 941bb4cf5ee385cfd22c8300b8926f17c79b5f75
     const carteDuNiveau = this.make.tilemap({ key: "map1a" });
 
     // Chargement du jeu de tuiles
