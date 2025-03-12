@@ -75,7 +75,7 @@ function spawnItems() {
     this.physics.add.collider(groupe_pommes, groupe_plateformes);
 
     groupe_salades.children.iterate(function(salade_i) {
-        var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+        var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);      
         salade_i.setBounceY(coef_rebond); // Appliquer le rebond
     });
     groupe_burgers.children.iterate(function(burger_i) {
