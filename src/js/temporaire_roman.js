@@ -37,6 +37,19 @@ this.physics.add.overlapp(player, groupe_burgers,ramasserBurger, null, this) ;
 
 
 
+  groupe_sodas = this.physics.add.group();
+
+   //ajoute la physique aux sodas
+   for (var i = 0; i < 10; i++) {
+    var coordX = 50 + 70 * i;
+    groupe_burgers.create(coordX, 10, "img_soda");
+  } 
+  this.physics.add.collider(groupe_sodas, groupe_plateformes); // ajoute les collisions entre les sodas et les plateformes
+  groupe_burgers.children.iterate(function iterateur(soda_i) {
+  // On tire un coefficient aléatoire de rerebond : valeur entre 0.4 et 0.8
+  var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+  soda_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au soda soda_i
+  }); 
 
 
   function ramasserSoda(un_player, un_soda){ //fonction pour ramasser les sodas
@@ -47,11 +60,27 @@ this.physics.add.overlapp(player, groupe_burgers,ramasserBurger, null, this) ;
     }, 5000); // 5000 pour  secondes
     //La variable speed ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
     score -= 50 ;
-  }//fin de la fonction ramasserBurger
-  this.physics.add.overlapp(player, groupe_sodas,ramasserSoda, null, this) ;
+  }//fin de la fonction ramasserSoda
+  this.physics.add.overlap(player, groupe_sodas,ramasserSoda, null, this) ;
 
 
   //**************************************************************************
+
+  groupe_redbulls = this.physics.add.group();
+
+   //ajoute la physique aux redbulls
+   for (var i = 0; i < 10; i++) {
+    var coordX = 10 + 70 * i;
+    groupe_burgers.create(coordX, 10, "img_redbull");
+  } 
+  this.physics.add.collider(groupe_redbulls, groupe_plateformes); // ajoute les collisions entre les sodas et les plateformes
+  groupe_burgers.children.iterate(function iterateur(sedbull_i) {
+  // On tire un coefficient aléatoire de rerebond : valeur entre 0.4 et 0.8
+  var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+  soda_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au redbull redbull_i
+}); 
+
+
   function ramasserRedbull(un_player, un_redbull){
     un_redbull.disableBody(true,true);
     un_player.setVelocityY(-1500);
@@ -64,4 +93,4 @@ this.physics.add.overlapp(player, groupe_burgers,ramasserBurger, null, this) ;
 
 
   }//fin de la fonction ramasserRedbull
-  this.physics.add.overlapp(player, groupe_redbulls, ramasserRedbull, null, this);
+  this.physics.add.overlap(player, groupe_redbulls, ramasserRedbull, null, this);
