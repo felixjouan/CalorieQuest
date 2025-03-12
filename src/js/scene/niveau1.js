@@ -108,7 +108,7 @@ export default class niveau1 extends Phaser.Scene {
       this.player.setVelocityX(0);
       this.player.anims.play("anim_face");
     }
-    if (this.clavier.up.isDown && this.player.body.touching.down) {
+    if (this.clavier.up.isDown && this.player.body.blocked.down) {
       this.player.setVelocityY(-330);
     }
 
