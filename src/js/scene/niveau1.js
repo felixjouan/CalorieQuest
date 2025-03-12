@@ -24,10 +24,6 @@ export default class niveau1 extends Phaser.Scene {
   }
 
   create() {
-    //fct.doNothing();
-    //fct.doAlsoNothing();
-
-
     // ajout d'un texte distintcif  du niveau
     this.add.text(400, 100, "Vous êtes dans le niveau 1", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
