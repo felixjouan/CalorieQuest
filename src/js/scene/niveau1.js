@@ -56,11 +56,15 @@ this.portes.create(9500, 550, "img_porte1");
 
     this.player = this.physics.add.sprite(100, 450, "dude");
     // Ajuster la boîte de collision du joueur pour de meilleurs déplacements
+    this.player.setScale(0.2);
+
     this.player.body.setSize(this.player.width * 0.7, this.player.height * 0.95);
     this.player.body.setOffset(5, 2);
 
+
     // Ajout de la collision entre le joueur et les plateformes
     this.physics.add.collider(this.player, plateforme);
+
 
     // Redimensionnement du monde
     this.physics.world.setBounds(0, 0, carteDuNiveau.widthInPixels, carteDuNiveau.heightInPixels);
