@@ -13,6 +13,7 @@ export default class niveau1 extends Phaser.Scene {
     this.load.image("fond", "src/assets/image/back.png");
     this.load.image("portail", "src/assets/image/gate.webp");
 
+
     // chargement de la carte
     this.load.tilemapTiledJSON("map1a", "src/assets/image/map1a.tmj");
 
