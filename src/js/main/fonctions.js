@@ -50,20 +50,20 @@ var config = {
    */
   function preload() {
     // chargement images
-    this.load.image("tjc", "src/assets/tuilesJeu copie.png");
-    this.load.image("grotte", "src/assets/grotte.jpg");
-    this.load.image("fond", "src/assets/back.png");
-    this.load.image("portail", "src/assets/gate.webp");
+    this.load.image("tjc", "src/assets/image/tuilesJeu copie.png");
+    this.load.image("grotte", "src/assets/image/grotte.jpg");
+    this.load.image("fond", "src/assets/image/back.png");
+    this.load.image("portail", "src/assets/image/gate.webp");
   
     // chargement de la carte
-    this.load.tilemapTiledJSON("map1a", "src/assets/map1a.tmj");
+    this.load.tilemapTiledJSON("map1a", "src/assets/image/map1a.tmj");
   
     // chargement du personnage dude
-    this.load.spritesheet("dude", "src/assets/dude.png", {
+    this.load.spritesheet("dude", "src/assets/image/dude.png", {
       frameWidth: 32,
       frameHeight: 48
     });
-  }
+  }//fin de la fonction preload
   
   /***********************************************************************/
   /** FONCTION CREATE 
@@ -140,7 +140,7 @@ var config = {
       frameRate: 20
     });
   
-  }
+  } //fin de la fonction create
   
   /***********************************************************************/
   /** FONCTION UPDATE 
@@ -169,7 +169,7 @@ var config = {
       player.setVelocityY(-350);
     }
   
-  }
+  } //fin de la fonction update
   
   /***********************************************************************/
   /** VARIABLES GLOBALES 
@@ -230,7 +230,7 @@ var config = {
       frameWidth: 32,
       frameHeight: 48
     });
-  }
+  } //fin de la fonction preload
   
   /***********************************************************************/
   /** FONCTION CREATE 
@@ -307,7 +307,7 @@ var config = {
       frameRate: 20
     });
   
-  }
+  }//fin de la fonction create
   
   /***********************************************************************/
   /** FONCTION UPDATE 
@@ -336,7 +336,7 @@ var config = {
       player.setVelocityY(-350);
     }
   
-  }
+  }//fin de la fonction update
   
   /***********************************************************************/
   /** VARIABLES GLOBALES 
