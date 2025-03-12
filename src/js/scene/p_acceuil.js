@@ -4,8 +4,8 @@ export default class p_acceuil extends Phaser.Scene {
   }
   //on charge les images
   preload() {
-    this.load.image("menu_fond", "/src/assets/image/");
-    this.load.image("imageBoutonPlay", "/src/assets/image/play-button.png");
+    this.load.image("menu_fond", "/src/assets/image/newpp.avif");
+    this.load.image("imageBoutonPlay", "/src/assets/image/button.png");
   }
 
   create() {
