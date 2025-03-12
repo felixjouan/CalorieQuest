@@ -1,4 +1,5 @@
-
+import { spawnItems } from './selection';
+//import spawnItems from "/src/js/scene/selection";
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
   constructor() {
@@ -99,7 +100,10 @@ export default class niveau1 extends Phaser.Scene {
       frameRate: 20
     });
 
-  }
+    setInterval(this.spawnItems, 5000); //exécute la fonnction toute les 5 secondes
+
+
+  }//fin de la fonction create
 
   update() {
 
@@ -107,23 +111,29 @@ export default class niveau1 extends Phaser.Scene {
       this.gameOver = true;
     }
     if (this.clavier.left.isDown) {
-      this.player.setVelocityX(-550);
+      this.player.setVelocityX(-200);
       this.player.anims.play("anim_tourne_gauche", true);
     } else if (this.clavier.right.isDown) {
-      this.player.setVelocityX(550);
+      this.player.setVelocityX(200);
       this.player.anims.play("anim_tourne_droite", true);
     } else {
       this.player.setVelocityX(0);
       this.player.anims.play("anim_face");
     }
     if (this.clavier.up.isDown && this.player.body.blocked.down) {
-      this.player.setVelocityY(-550);
+      this.player.setVelocityY(-400);
     }
+
+    if(this.clavier.down.isDown){
+      this.player.anims.play("anim_face");
+      this.player.setVelocityY(200);
+    }
+    
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
       if (this.physics.overlap(this.player, this.portes)) {
         this.scene.switch("selection");
       }
     }
-  }
+  }//fin de la fonction update
 }

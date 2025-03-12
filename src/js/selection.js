@@ -93,46 +93,29 @@ function getRandomInt(max) {
 
  
 
-function spawnItems() {
+export function spawnItems() {
 
   //On récupère la position du joueur
-
   var playerX = player.x;
-
   var playerY = player.y;
-
   for (var i = 0; i < 3; i++) {
 
     numItem = getRandomInt(4); //expecting 0,1,2,3
-
     var coordX = playerX - 70 + 70 * i; // Position en X (autour du joueur)
-
     var coordY = playerY - 50; // Position en Y (50 pixels au-dessus du joueur)
 
     if (numItem == 0) {
-
       groupe_salades.create(coordX, coordY, 'img_salade');
-
     }
-
     else if (numItem == 1) {
-
       groupe_redbulls.create(coordX, coordY, 'img_redbull');
-
     }
-
     else if (numItem == 2) {
-
       groupe_sodas.create(coordX, coordY, 'img_soda')
-
     }
-
     else if (numItem == 3) {
-
       groupe_burgers.create(coordX, coordY, 'img_burger')
-
     }
-
   } //fin du for
 }//fin de la fonction spawnItems
 
