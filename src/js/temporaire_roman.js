@@ -403,23 +403,37 @@ groupe_bananes = this.physics.add.group();
     ///////////////////////////////////////////////////////////////////////////////////
  
     var groupes = {
-      "créersoda": groupe_sodas,
-      "créerburger": groupe_burgers,
-      "créerbanane": groupe_bananes,  
-      "créerredbull": groupe_redbulls,
-      "créercarrotte": groupe_carrots,
-      "créersalade": groupe_salades
-
+      "soda": groupe_sodas,
+      "burger": groupe_burgers,
+      "banane": groupe_bananes,
+      "redbull": groupe_redbulls,
+      "carrotte": groupe_carrots,
+      "salade": groupe_salades
   };
-
+  
+  // Liste des images associées à chaque groupe
+  var images = {
+      "soda": "img_soda",
+      "burger": "img_burger",
+      "banane": "img_banane",
+      "redbull": "img_redbull",
+      "carrotte": "img_carrotte",
+      "salade": "img_salade"
+  };
+  
   for (var i = 0; i < 10; i++) {
- 
-    var coordX = 70 + 70 * i;
-
-    var groupeChoisi = Phaser.Utils.Array.GetRandom(Object.keys(groupes));
-
-    groupes.create(coordX, 10, groupeChoisi);
-
+      var coordX = 70 + 70 * i;
+  
+      // Choisir un groupe aléatoirement
+      var groupeChoisi = Phaser.Utils.Array.GetRandom(Object.keys(groupes));
+  
+      // Créer l'objet avec l'image associée
+      var objet = groupes[groupeChoisi].create(coordX, 10, images[groupeChoisi]);
+  
+      // Ajouter un rebond aléatoire
+      var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+      objet.setBounceY(coef_rebond);
+  }
    
 
     ///////////////////////////////////////////////////////////////////////////////// 
@@ -703,40 +717,7 @@ groupe_bananes = this.physics.add.group();
  
 
     }); 
- 
 
- 
-
- 
-
-function ramasserBurger(un_player, un_burger){ //fonction pour ramasser les burgers
- 
-
-    un_burger.disableBody(true,true); //enlève la texture du burger
- 
-
-    speedjump = 0.5*speedjump ; //on divise par 2 la vitesse de saut
- 
-
-    //setTimeout(speedjump=speedjump/10 , 500000) ;
- 
-
-    setTimeout(() => {
- 
-
-      speedjump = speedjump*2;
- 
-
-    }, 5000); // 5000 pour  secondes
- 
-
-    //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
- 
-
-    score -= 50 ;
- 
-
-}//fin de la fonction ramasserBurger
  
 
 this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
@@ -757,15 +738,7 @@ soda_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au soda 
 }); 
 
 
-function ramasserSoda(un_player, un_soda){ //fonction pour ramasser les sodas
- un_burger.disableBody(true,true); //enlève la texture du soda
- speed = 0.5*speed ; //on divise par 2 la vitesse de déplacement
- setTimeout(() => {
-   speed = speed*2;
- }, 5000); // 5000 pour  secondes
- //La variable speed ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
- score -= 50 ;
-}//fin de la fonction ramasserSoda
+
 this.physics.add.overlap(player, groupe_sodas,ramasserSoda, null, this) ;
 
 
@@ -903,7 +876,7 @@ this.physics.add.overlap(player, groupe_redbulls, ramasserRedbull, null, this);
  
   } // fin de la fonctoin update
  
-}
+
  
 
  
