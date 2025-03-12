@@ -52,6 +52,7 @@ var groupe_burgers ;
  
 var groupe_redbulls ;
  
+var groupe_pommes ;
 
  
 // définition de la classe "selection"
@@ -112,14 +113,19 @@ export default class selection extends Phaser.Scene {
  
 
  
-    this.load.image("img_salada", "src/assets/image/food/salada.png");
+    this.load.image("img_salade", "src/assets/image/food/salada.png");
  
     this.load.image("img_carotte", "src/assets/image/food/carrot.png");
  
     this.load.image("img_burger", "src/assets/image/food/burger.png");
  
     this.load.image("img_banane","src/assets/image/food/banana.png");
+    
+    this.load.image("img_redbull","src/assets/image/food/redbull.png");
 
+    this.load.image("img_soda","src/assets/image/food/coca.png");
+
+    this.load.image("img_pomme","src/assets/image/food/apple.png");
  
 
  
@@ -399,6 +405,13 @@ groupe_salades = this.physics.add.group();
 groupe_burgers = this.physics.add.group();
 groupe_sodas = this.physics.add.group();
 groupe_redbulls = this.physics.add.group();
+groupe_pommes = this.physics.add.group();
+
+this.physics.add.collider(groupe_salades, groupe_plateformes);
+this.physics.add.collider(groupe_burgers, groupe_plateformes);
+this.physics.add.collider(groupe_redbulls, groupe_plateformes);
+this.physics.add.collider(groupe_sodas, groupe_plateformes);
+this.physics.add.collider(groupe_pommes, groupe_plateformes);
 
 
 var numItem ; //salade, burger, soda, pomme
@@ -409,12 +422,12 @@ function spawnItems() {
     for (var i = 0 ; i < 3 ; i++){
         numItem = getRandomInt(4) ; //expecting 0,1,2,3
         var coordX = playerX - 70 + 70 * i; // Position en X (autour du joueur)
-        var coordY = playerY - 50; // Position en Y (50 pixels au-dessus du joueur)
+        var coordY = playerY - 200; // Position en Y (50 pixels au-dessus du joueur)
         if (numItem == 0){
             groupe_salades.create(coordX, coordY, 'img_salade') ;
         }
         else if (numItem == 1){
-            groupe_redbulls.create(coordX,coordY,'img_redbull') ;
+            groupe_pommes.create(coordX,coordY,'img_pomme') ;
         }
         else if(numItem == 2){
             groupe_sodas.create(coordX,coordY,'img_soda')
@@ -425,8 +438,8 @@ function spawnItems() {
     } //fin du for
     this.physics.add.collider(groupe_salades, groupe_plateformes);
     this.physics.add.collider(groupe_sodas, groupe_plateformes);
-    this.physics.add.collider(groupe_burgers, groupe_plateformes);
-    this.physics.add.collider(groupe_redbulls, groupe_plateformes);
+    this.physics.add.collider(groupe_burgers, groupe_plateformes);//
+    this.physics.add.collider(groupe_pommes, groupe_plateformes);
 
     groupe_salades.children.iterate(function(salade_i) {
         var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);      
@@ -435,7 +448,7 @@ function spawnItems() {
     groupe_burgers.children.iterate(function(burger_i) {
         var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
         burger_i.setBounceY(coef_rebond); // Appliquer le rebond
-    });groupe_redbulls.children.iterate(function(pomme_i) {
+    });groupe_pommes.children.iterate(function(pomme_i) {
         var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
         pomme_i_i.setBounceY(coef_rebond); // Appliquer le rebond
     });groupe_sodas.children.iterate(function(soda_i) {
@@ -471,7 +484,7 @@ function getRandomInt(max) {
  
       // on regarde le nombre de salades qui sont encore actives (non ramassées)
  
-      if (groupe_salades.countActive(true) === 0) {     
+      /*if (groupe_salades.countActive(true) === 0) {     
  
       // si ce nombre est égal à 0 : on va réactiver toutes les étoiles désactivées
  
@@ -485,7 +498,7 @@ function getRandomInt(max) {
  
       });    
  
-      }//fin du if()       
+      }//fin du if()    */   
  
 
  
@@ -658,7 +671,7 @@ function getRandomInt(max) {
  
     function ramasserSoda(un_player, un_soda){ //fonction pour ramasser les sodas
  
-      un_burger.disableBody(true,true); //enlève la texture du soda
+      un_soda.disableBody(true,true); //enlève la texture du soda
  
       speed = 0.5*speed ; //on divise par 2 la vitesse de déplacement
  
