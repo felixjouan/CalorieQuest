@@ -31,10 +31,6 @@ var groupe_salades;
 var zone_texte_score; //variable pour afficher le score ()
 
 var score = 0;
-var zone_wasted
- 
-var gameOver = false ; 
- 
 
 var gameOver = false;
 
@@ -89,18 +85,6 @@ function spawnItems() {
 
 }//fin de la fonction spawnItems
 
- 
-var groupe_carrots ; //groupe qui va contenir les carottes 
- 
-var groupe_sodas ; 
- 
-var groupe_bananes ; 
- 
-var groupe_burgers ; 
- 
-var groupe_redbulls ;
- 
-var groupe_pommes ;
 
 // définition de la classe "selection"
 
@@ -158,21 +142,18 @@ export default class selection extends Phaser.Scene {
 
     this.load.image("img_porte3", "src/assets/image/door3.png");
 
- 
-    this.load.image("img_salade", "src/assets/image/food/salada.png");
- 
+
+
+    this.load.image("img_salada", "src/assets/image/food/salada.png");
+
     this.load.image("img_carotte", "src/assets/image/food/carrot.png");
 
     this.load.image("img_burger", "src/assets/image/food/burger.png");
- 
-    this.load.image("img_banane","src/assets/image/food/banana.png");
-    
-    this.load.image("img_redbull","src/assets/image/food/redbull.png");
 
-    this.load.image("img_soda","src/assets/image/food/coca.png");
+    this.load.image("img_banane", "src/assets/image/food/banana.png");
 
-    this.load.image("img_pomme","src/assets/image/food/apple.png");
- 
+
+
 
   }
 
@@ -449,59 +430,26 @@ export default class selection extends Phaser.Scene {
     groupe_sodas = this.physics.add.group();
     groupe_redbulls = this.physics.add.group();
 
-groupe_salades = this.physics.add.group();
-groupe_burgers = this.physics.add.group();
-groupe_sodas = this.physics.add.group();
-groupe_redbulls = this.physics.add.group();
-groupe_pommes = this.physics.add.group();
-
-this.physics.add.collider(groupe_salades, groupe_plateformes);
-this.physics.add.collider(groupe_burgers, groupe_plateformes);
-this.physics.add.collider(groupe_redbulls, groupe_plateformes);
-this.physics.add.collider(groupe_sodas, groupe_plateformes);
-this.physics.add.collider(groupe_pommes, groupe_plateformes);
-
-
-var numItem ; //salade, burger, soda, pomme
-function spawnItems() {
-    //On récupère la position du joueur
-    var playerX = player.x;
-    var playerY = player.y;
-    for (var i = 0 ; i < 3 ; i++){
-        numItem = getRandomInt(7) ; //expecting 0,1,2,3,4,5,6
-        var coordX = playerX - 70 + 70 * i; // Position en X (autour du joueur)
-        var coordY = playerY - 200; // Position en Y (50 pixels au-dessus du joueur)
-        if (numItem == 0 || numItem == 4 || numItem == 5 || numItem == 6 ){
-            groupe_salades.create(coordX, coordY, 'img_salade') ;
-        }
-        else if (numItem == 1){
-            groupe_pommes.create(coordX,coordY,'img_pomme') ;
-        }
-        else if(numItem == 2){
-            groupe_sodas.create(coordX,coordY,'img_soda')
-        }
-        else if(numItem == 3){
-            groupe_burgers.create(coordX,coordY,'img_burger')
-        }
-    } //fin du for
-    //this.physics.add.collider(groupe_salades, groupe_plateformes);
-    //this.physics.add.collider(groupe_sodas, groupe_plateformes);
-    //this.physics.add.collider(groupe_burgers, groupe_plateformes);//
-    //this.physics.add.collider(groupe_pommes, groupe_plateformes);
+    this.physics.add.collider(groupe_salades, groupe_plateformes);
+    this.physics.add.collider(groupe_sodas, groupe_plateformes);
+    this.physics.add.collider(groupe_burgers, groupe_plateformes);
+    this.physics.add.collider(groupe_redbulls, groupe_plateformes);
 
     groupe_salades.children.iterate(function (salade_i) {
       var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
       salade_i.setBounceY(coef_rebond); // Appliquer le rebond
     });
-    groupe_burgers.children.iterate(function(burger_i) {
-        var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
-        burger_i.setBounceY(coef_rebond); // Appliquer le rebond
-    });groupe_pommes.children.iterate(function(pomme_i) {
-        var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
-        pomme_i.setBounceY(coef_rebond); // Appliquer le rebond
-    });groupe_sodas.children.iterate(function(soda_i) {
-        var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
-        soda_i.setBounceY(coef_rebond); // Appliquer le rebond
+    groupe_burgers.children.iterate(function (burger_i) {
+      var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+      burger_i.setBounceY(coef_rebond); // Appliquer le rebond
+    }); 
+    groupe_redbulls.children.iterate(function (pomme_i) {
+      var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+      pomme_i_i.setBounceY(coef_rebond); // Appliquer le rebond
+    }); 
+    groupe_sodas.children.iterate(function (soda_i) {
+      var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+      soda_i.setBounceY(coef_rebond); // Appliquer le rebond
     });
 
 
@@ -516,31 +464,6 @@ function spawnItems() {
 
       //On désactive lme corps physique de la salade mais aussi sa texture
 
- 
-      // deux élement qui se sont superposés : le player, et la salade en question
- 
-      // les actions à entreprendre seront écrites dans la fonction ramasserSalade
- 
-      //this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);
- 
-      // on regarde le nombre de salades qui sont encore actives (non ramassées)
- 
-      /*if (groupe_salades.countActive(true) === 0) {     
- 
-      // si ce nombre est égal à 0 : on va réactiver toutes les étoiles désactivées
- 
-      // pour chaque salade salade_i du groupe, on réacttive salade_i avec la méthode enableBody
- 
-      // ceci s'ecrit bizarrement : avec un itérateur sur les enfants (children) du groupe (equivalent du for)
- 
-      groupe_salades.children.iterate(function iterateur(salade_i) {    
- 
-      salade_i.enableBody(true, salade_i.x, 0, true, true);   
- 
-      });    
- 
-      }//fin du if()    */   
- 
 
       // deux élement qui se sont superposés : le player, et la salade en question
 
@@ -576,19 +499,6 @@ function spawnItems() {
 
 
     this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);  //Enlève le corps de la salade
- 
-
-    function ramasserPomme(un_player, une_pomme){ //fonction pour ramasser les pommes
- 
-      une_pomme.disableBody(true,true); //enlève la texture de la pomme
- 
-      score += 40 ;
- 
-    }//fin de la fonction ramasserPomme
- 
-
- 
-    this.physics.add.overlap(player, groupe_pommes, ramasserPomme, null , this);
 
     zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' }); //placement du score à ces coordonnées
 
@@ -716,13 +626,16 @@ function spawnItems() {
 
     }//fin de la fonction ramasserBanane
 
-    /*
-    function ramasserBurger(un_player, un_burger){ //fonction pour ramasser les burgers
- 
-      un_burger.disableBody(true,true); //enlève la texture du burger
- 
-      speedjump = 0.5*speedjump ; //on divise par 2 la vitesse de saut
- 
+    this.physics.add.overlap(player, groupe_bananes, ramasserBanane, null, this); //enlève le corps de la banane en appelant la fonction
+
+
+
+    function ramasserBurger(un_player, un_burger) { //fonction pour ramasser les burgers
+
+      un_burger.disableBody(true, true); //enlève la texture du burger
+
+      speedjump = 0.5 * speedjump; //on divise par 2 la vitesse de saut
+
       //setTimeout(speedjump=speedjump/10 , 500000) ;
 
       setTimeout(() => {
@@ -740,17 +653,17 @@ function spawnItems() {
     this.physics.overlap(player, groupe_burgers, ramasserBurger, null, this);
 
     //enlève le corps des burgers avec l'invocation de la fonction 
- 
-    */
- 
 
- 
-    function ramasserSoda(un_player, un_soda){ //fonction pour ramasser les sodas
- 
-      un_soda.disableBody(true,true); //enlève la texture du soda
- 
-      speed = 0.5*speed ; //on divise par 2 la vitesse de déplacement
- 
+
+
+
+
+    function ramasserSoda(un_player, un_soda) { //fonction pour ramasser les sodas
+
+      un_soda.disableBody(true, true); //enlève la texture du soda
+
+      speed = 0.5 * speed; //on divise par 2 la vitesse de déplacement
+
       setTimeout(() => {
 
         speed = speed * 2;
@@ -801,74 +714,6 @@ function spawnItems() {
 
 
     //ajoute la physique aux burgers
- 
-/*
-    for (var i = 0; i < 10; i++) {
- 
-
-      var coordX = 70 + 70 * i;
- 
-
-      groupe_burgers.create(coordX, 10, "img_burger");
- 
-
-    } 
- 
-
-    this.physics.add.collider(groupe_burgers, groupe_plateformes); // ajoute les collisions entre les burgers et les plateformes
- 
-
-    groupe_burgers.children.iterate(function iterateur(burger_i) {
- 
-
-    // On tire un coefficient aléatoire de rerebond : valeur entre 0.4 et 0.8
- 
-
-    var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
- 
-
-    burger_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au burger burger_i
- 
-
-    }); 
- 
-*/
- 
-
- 
-
-function ramasserBurger(un_player, un_burger){ //fonction pour ramasser les burgers
- 
-
-    un_burger.disableBody(true,true); //enlève la texture du burger
- 
-
-    speedjump = 0.5*speedjump ; //on divise par 2 la vitesse de saut
- 
-
-    //setTimeout(speedjump=speedjump/10 , 500000) ;
- 
-
-    setTimeout(() => {
- 
-
-      speedjump = speedjump*2;
- 
-
-    }, 5000); // 5000 pour  secondes
- 
-
-    //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
- 
-
-    score -= 20 ;
- 
-
-}//fin de la fonction ramasserBurger
- 
-
-this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
- 
 
     /*
         for (var i = 0; i < 10; i++) {
@@ -1005,45 +850,26 @@ this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
     if (keyZ.isDown == true && player.body.touching.down) { //pour la touche Z
 
       player.setVelocityY(-speedjump) //appliquer une velocite de -speedjump verticalement
- 
+
     }
- 
-    if (score <= -1000){
-      zone_texte_wasted = this.add.text(160, 160, 'Vous avez fait un infarctus', { fontSize: '128px', fill: '#000' });
-      gameOver = true ; 
- 
+
+    if (score <= -1000) {
+
+      gameOver = true;
+
     }
- 
-    if(gameOver){
-      this.physics.pause() ; //met en pause la gravité
-      player.setTint(0xff0000);
-      player.anims.play("anim_face");
- 
-      return ; //met gameOver à true 
- 
+
+    if (gameOver) {
+
+      return; //met gameOver à true 
+
     }
- 
- 
+
+
+
+
+
     if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) {
- 
-      if (this.physics.overlap(player, this.porte1))
- 
-        this.scene.switch("niveau1");
- 
-      if (this.physics.overlap(player, this.porte2))
- 
-        this.scene.switch("niveau2");
- 
-      if (this.physics.overlap(player, this.porte3))
- 
-        this.scene.switch("niveau3");
- 
-    }//fin du if
- 
-  }//fin de la fonction update
- 
-}
- 
 
       if (this.physics.overlap(player, this.porte1))
 
@@ -1070,6 +896,3 @@ this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
 /** CONFIGURATION GLOBALE DU JEU ET LANCEMENT 
  
 /***********************************************************************/
-
-//fonction : ramasserCarotte ramasserSoda ramasserBurger ramasserSalade ramasserRedbull ramasserPomme spawnItem
-
