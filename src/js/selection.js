@@ -24,12 +24,11 @@ let keyQ;
 let keyD;
  
 let keyZ;
- 
 
  
 var groupe_salades ;
  
-var zone_texte_score  ; //variable pour afficher le score 
+var zone_texte_score  ; //variable pour afficher le score ()
  
 var score = 0;
  
@@ -100,6 +99,7 @@ export default class selection extends Phaser.Scene {
     });
  
 
+    this.load.image("img_bombe" , "src/assets/image/bomb.png" );
  
 
     
@@ -119,10 +119,6 @@ export default class selection extends Phaser.Scene {
     this.load.image("img_burger", "src/assets/image/food/burger.png");
  
     this.load.image("img_banane","src/assets/image/food/banana.png");
-
-    this.load.image("img_soda","src/assets/image/food/coca.png");
-
-    this.load.image("img_redbull","src/assets/image/food/redbull.png");
 
  
 
@@ -156,6 +152,9 @@ export default class selection extends Phaser.Scene {
       //fct.doNothing();
  
       //fct.doAlsoNothing();
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
  
 
  
@@ -186,8 +185,6 @@ export default class selection extends Phaser.Scene {
     groupe_plateformes = this.physics.add.staticGroup();
  
     // une fois le groupe créé, on va créer les platesformes , le sol, et les ajouter au groupe groupe_plateformes
- 
-
  
     // l'image img_plateforme fait 400x32. On en met 2 à coté pour faire le sol
  
@@ -371,7 +368,7 @@ export default class selection extends Phaser.Scene {
  
 
 
- 
+ /*
     groupe_salades = this.physics.add.group();
  
     //ajoute la physique aux salades 
@@ -396,7 +393,66 @@ export default class selection extends Phaser.Scene {
  
     }); 
  
+*/
 
+groupe_salades = this.physics.add.group();
+groupe_burgers = this.physics.add.group();
+groupe_sodas = this.physics.add.group();
+groupe_redbulls = this.physics.add.group();
+
+
+var numItem ; //salade, burger, soda, pomme
+function spawnItems() {
+    //On récupère la position du joueur
+    var playerX = player.x;
+    var playerY = player.y;
+    for (var i = 0 ; i < 3 ; i++){
+        numItem = getRandomInt(4) ; //expecting 0,1,2,3
+        var coordX = playerX - 70 + 70 * i; // Position en X (autour du joueur)
+        var coordY = playerY - 50; // Position en Y (50 pixels au-dessus du joueur)
+        if (numItem == 0){
+            groupe_salades.create(coordX, coordY, 'img_salade') ;
+        }
+        else if (numItem == 1){
+            groupe_redbulls.create(coordX,coordY,'img_redbull') ;
+        }
+        else if(numItem == 2){
+            groupe_sodas.create(coordX,coordY,'img_soda')
+        }
+        else if(numItem == 3){
+            groupe_burgers.create(coordX,coordY,'img_burger')
+        }
+    } //fin du for
+    this.physics.add.collider(groupe_salades, groupe_plateformes);
+    this.physics.add.collider(groupe_sodas, groupe_plateformes);
+    this.physics.add.collider(groupe_burgers, groupe_plateformes);
+    this.physics.add.collider(groupe_redbulls, groupe_plateformes);
+
+    groupe_salades.children.iterate(function(salade_i) {
+        var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);      
+        salade_i.setBounceY(coef_rebond); // Appliquer le rebond
+    });
+    groupe_burgers.children.iterate(function(burger_i) {
+        var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+        burger_i.setBounceY(coef_rebond); // Appliquer le rebond
+    });groupe_redbulls.children.iterate(function(pomme_i) {
+        var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+        pomme_i_i.setBounceY(coef_rebond); // Appliquer le rebond
+    });groupe_sodas.children.iterate(function(soda_i) {
+        var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+        soda_i.setBounceY(coef_rebond); // Appliquer le rebond
+    });
+
+
+
+}//fin de la fonction spawnItems
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }//fin de la fonction random
+
+
+  setInterval(spawnItems, 5000); //exécute la fo nction toute les 5 secondes
  
 
  
@@ -405,7 +461,6 @@ export default class selection extends Phaser.Scene {
       une_salade.disableBody(true,true) ;
  
       //On désactive lme corps physique de la salade mais aussi sa texture
- 
 
  
       // deux élement qui se sont superposés : le player, et la salade en question
@@ -416,7 +471,7 @@ export default class selection extends Phaser.Scene {
  
       // on regarde le nombre de salades qui sont encore actives (non ramassées)
  
-      if (groupe_salades.countActive(true) === 0) {
+      if (groupe_salades.countActive(true) === 0) {     
  
       // si ce nombre est égal à 0 : on va réactiver toutes les étoiles désactivées
  
@@ -424,13 +479,13 @@ export default class selection extends Phaser.Scene {
  
       // ceci s'ecrit bizarrement : avec un itérateur sur les enfants (children) du groupe (equivalent du for)
  
-      groupe_salades.children.iterate(function iterateur(salade_i) {
+      groupe_salades.children.iterate(function iterateur(salade_i) {    
  
-      salade_i.enableBody(true, salade_i.x, 0, true, true);
+      salade_i.enableBody(true, salade_i.x, 0, true, true);   
  
-      });
+      });    
  
-      }//fin du if()
+      }//fin du if()       
  
 
  
@@ -439,13 +494,6 @@ export default class selection extends Phaser.Scene {
       zone_texte_score.setText("Score: " + score); //Affichage du score 
  
     }//fin de la fonction rammasserSalade
- 
-
-
- 
-
-    
- 
 
  
     this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);  //Enlève le corps de la salade
@@ -453,7 +501,7 @@ export default class selection extends Phaser.Scene {
     zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' }); //placement du score à ces coordonnées
  
 
- 
+
     groupe_carrots = this.physics.add.group();
  
     this.physics.add.collider(groupe_carrots, groupe_plateformes); // ajoute les collisions entre les carottes et les plateformes
@@ -544,8 +592,6 @@ export default class selection extends Phaser.Scene {
  
 
  
-
- 
     var une_banane = groupe_bananes.create(100, 16, "img_banane") ;
  
     une_banane.setBounce(1) ;
@@ -612,7 +658,7 @@ export default class selection extends Phaser.Scene {
  
     function ramasserSoda(un_player, un_soda){ //fonction pour ramasser les sodas
  
-      un_soda.disableBody(true,true); //enlève la texture du soda
+      un_burger.disableBody(true,true); //enlève la texture du soda
  
       speed = 0.5*speed ; //on divise par 2 la vitesse de déplacement
  
@@ -626,7 +672,7 @@ export default class selection extends Phaser.Scene {
  
       score -= 50 ;
  
-    }//fin de la fonction ramasserSoda
+    }//fin de la fonction ramasserBurger
  
     this.physics.add.overlap(player, groupe_sodas,ramasserSoda, null, this) ;
  
@@ -667,7 +713,7 @@ export default class selection extends Phaser.Scene {
 
     //ajoute la physique aux burgers
  
-
+/*
     for (var i = 0; i < 10; i++) {
  
 
@@ -697,77 +743,43 @@ export default class selection extends Phaser.Scene {
 
     }); 
  
-
+*/
  
 
  
 
+function ramasserBurger(un_player, un_burger){ //fonction pour ramasser les burgers
+ 
 
+    un_burger.disableBody(true,true); //enlève la texture du burger
+ 
+
+    speedjump = 0.5*speedjump ; //on divise par 2 la vitesse de saut
+ 
+
+    //setTimeout(speedjump=speedjump/10 , 500000) ;
+ 
+
+    setTimeout(() => {
+ 
+
+      speedjump = speedjump*2;
+ 
+
+    }, 5000); // 5000 pour  secondes
+ 
+
+    //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
+ 
+
+    score -= 50 ;
+ 
+
+}//fin de la fonction ramasserBurger
  
 
 this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
  
-/*********************************************************************************** */
-
-
-
-groupe_sodas = this.physics.add.group();
-
-//ajoute la physique aux sodas
-for (var i = 0; i < 10; i++) {
- var coordX = 50 + 70 * i;
- groupe_burgers.create(coordX, 10, "img_soda");
-} 
-this.physics.add.collider(groupe_sodas, groupe_plateformes); // ajoute les collisions entre les sodas et les plateformes
-groupe_burgers.children.iterate(function iterateur(soda_i) {
-// On tire un coefficient aléatoire de rerebond : valeur entre 0.4 et 0.8
-var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
-soda_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au soda soda_i
-}); 
-
-
-function ramasserSoda(un_player, un_soda){ //fonction pour ramasser les sodas
- un_burger.disableBody(true,true); //enlève la texture du soda
- speed = 0.5*speed ; //on divise par 2 la vitesse de déplacement
- setTimeout(() => {
-   speed = speed*2;
- }, 5000); // 5000 pour  secondes
- //La variable speed ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
- score -= 50 ;
-}//fin de la fonction ramasserSoda
-this.physics.add.overlap(player, groupe_sodas,ramasserSoda, null, this) ;
-
-
-//**************************************************************************
-
-groupe_redbulls = this.physics.add.group();
-
-//ajoute la physique aux redbulls
-for (var i = 0; i < 10; i++) {
- var coordX = 10 + 70 * i;
- groupe_burgers.create(coordX, 10, "img_redbull");
-} 
-this.physics.add.collider(groupe_redbulls, groupe_plateformes); // ajoute les collisions entre les sodas et les plateformes
-groupe_burgers.children.iterate(function iterateur(redbull_i) {
-// On tire un coefficient aléatoire de rerebond : valeur entre 0.4 et 0.8
-var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
-redbull_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au redbull redbull_i
-}); 
-
-
-function ramasserRedbull(un_player, un_redbull){
-  un_redbull.disableBody(true,true);
-  un_player.setVelocityY(-1500);
-  speedjump = 0.3 * speedjump ;
-  setTimeout(() => {
-  speedjump = 10*speedjump ;
-  speedjump = speedjump / 3 ;
- }, 5000);
- //La variable speedjump remise à sa valeur initiale au bout d'une certaine durée 
- score -= 1000;
-
-}//fin de la fonction ramasserRedbull
-this.physics.add.overlap(player, groupe_redbulls, ramasserRedbull, null, this);
 
     
  
@@ -841,14 +853,13 @@ this.physics.add.overlap(player, groupe_redbulls, ramasserRedbull, null, this);
  
     if (score <= -1000){
  
-      gameOver = true ; //met gameOver à true 
-      //this.physics.pause() ;
+      gameOver = true ; 
  
     }
  
     if(gameOver){
  
-      return ; 
+      return ; //met gameOver à true 
  
     }
  
@@ -872,7 +883,7 @@ this.physics.add.overlap(player, groupe_redbulls, ramasserRedbull, null, this);
  
     }
  
-  } // fin de la fonctoin update
+  }
  
 }
  
