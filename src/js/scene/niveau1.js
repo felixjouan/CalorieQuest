@@ -31,9 +31,9 @@ export default class niveau1 extends Phaser.Scene {
     });
 
     this.portes = this.physics.add.staticGroup();
-this.portes.create(100, 550, "img_porte1"); 
-this.portes.create(600, 550, "img_porte1"); 
-this.portes.create(9500, 550, "img_porte1");
+    this.portes.create(100, 550, "portail"); 
+    //this.portes.create(600, 550, "portail"); 
+    this.portes.create(9500, 550, "portail");
     const carteDuNiveau = this.make.tilemap({ key: "map1a" });
 
     // Chargement du jeu de tuiles
@@ -116,7 +116,7 @@ this.portes.create(9500, 550, "img_porte1");
     }
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
-      if (this.physics.overlap(this.player, this.porte_retour)) {
+      if (this.physics.overlap(this.player, this.portes)) {
         this.scene.switch("selection");
       }
     }
