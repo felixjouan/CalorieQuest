@@ -95,17 +95,17 @@ export default class niveau1 extends Phaser.Scene {
 
   update() {
     if (this.clavier.left.isDown) {
-      this.player.setVelocityX(-160);
+      this.player.setVelocityX(-550);
       this.player.anims.play("anim_tourne_gauche", true);
     } else if (this.clavier.right.isDown) {
-      this.player.setVelocityX(160);
+      this.player.setVelocityX(550);
       this.player.anims.play("anim_tourne_droite", true);
     } else {
       this.player.setVelocityX(0);
       this.player.anims.play("anim_face");
     }
     if (this.clavier.up.isDown && this.player.body.blocked.down) {
-      this.player.setVelocityY(-330);
+      this.player.setVelocityY(-550);
     }
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
