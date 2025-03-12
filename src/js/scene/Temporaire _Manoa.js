@@ -96,3 +96,5 @@ function spawnItems() {
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }//fin de la fonction random
+
+  
