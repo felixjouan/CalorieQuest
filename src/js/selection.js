@@ -652,7 +652,7 @@ function getRandomInt(max) {
     this.physics.add.overlap(player, groupe_bananes, ramasserBanane, null , this); //enlève le corps de la banane en appelant la fonction
  
 
- 
+    /*
     function ramasserBurger(un_player, un_burger){ //fonction pour ramasser les burgers
  
       un_burger.disableBody(true,true); //enlève la texture du burger
@@ -677,7 +677,7 @@ function getRandomInt(max) {
  
     //enlève le corps des burgers avec l'invocation de la fonction 
  
-
+    */
  
 
  
