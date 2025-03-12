@@ -1,9 +1,7 @@
 // chargement des librairies
-import Phaser from "phaser";
 import selection from "/src/js/selection.js";
 import niveau1 from "/src/js/scene/niveau1.js";
 import niveau2 from "/src/js/scene/niveau2.js";
-import niveau3 from "/src/js/scene/niveau3.js";
 import p_acceuil from "/src/js/scene/p_acceuil.js";
 
 
@@ -24,7 +22,7 @@ var config = {
       debug: true // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
     }
   },
-  scene: [selection, niveau1, niveau2, niveau3, p_acceuil]
+  scene: [selection, niveau1, niveau2, p_acceuil]
 };
 
 // création et lancement du jeu
