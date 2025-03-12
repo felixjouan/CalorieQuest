@@ -524,7 +524,7 @@ function getRandomInt(max) {
 
  
     this.physics.add.overlap(player, groupe_pommes, ramasserPomme, null , this);
-    
+
     zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' }); //placement du score à ces coordonnées
  
 
@@ -888,6 +888,7 @@ this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
       this.physics.pause() ; //met en pause la gravité
       player.setTint(0xff0000);
       player.anims.play("anim_face");
+ 
       return ; //met gameOver à true 
  
     }
@@ -920,3 +921,6 @@ this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
 /** CONFIGURATION GLOBALE DU JEU ET LANCEMENT 
  
 /***********************************************************************/
+
+//fonction : ramasserCarotte ramasserSoda ramasserBurger ramasserSalade ramasserRedbull ramasserPomme spawnItem
+
