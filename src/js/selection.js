@@ -511,6 +511,18 @@ function getRandomInt(max) {
  
     this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);  //Enlève le corps de la salade
  
+    function ramasserPomme(un_player, une_pomme){ //fonction pour ramasser les carottes
+ 
+      une_pomme.disableBody(true,true); //enlève la texture de la carotte
+ 
+      score += 40 ;
+ 
+    }//fin de la fonction ramasserCarotte
+ 
+
+ 
+    this.physics.add.overlap(player, groupe_pommes, ramasserPomme, null , this);
+    
     zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' }); //placement du score à ces coordonnées
  
 
