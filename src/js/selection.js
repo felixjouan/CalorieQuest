@@ -885,7 +885,9 @@ this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
     }
  
     if(gameOver){
- 
+      this.physics.pause() ; //met en pause la gravité
+      player.setTint(0xff0000);
+      player.anims.play("anim_face");
       return ; //met gameOver à true 
  
     }
