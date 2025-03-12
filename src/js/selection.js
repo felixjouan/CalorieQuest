@@ -420,10 +420,10 @@ function spawnItems() {
     var playerX = player.x;
     var playerY = player.y;
     for (var i = 0 ; i < 3 ; i++){
-        numItem = getRandomInt(4) ; //expecting 0,1,2,3
+        numItem = getRandomInt(7) ; //expecting 0,1,2,3,4,5,6
         var coordX = playerX - 70 + 70 * i; // Position en X (autour du joueur)
         var coordY = playerY - 200; // Position en Y (50 pixels au-dessus du joueur)
-        if (numItem == 0){
+        if (numItem == 0 || numItem == 4 || numItem == 5 || numItem == 6 ){
             groupe_salades.create(coordX, coordY, 'img_salade') ;
         }
         else if (numItem == 1){
@@ -436,10 +436,10 @@ function spawnItems() {
             groupe_burgers.create(coordX,coordY,'img_burger')
         }
     } //fin du for
-    this.physics.add.collider(groupe_salades, groupe_plateformes);
-    this.physics.add.collider(groupe_sodas, groupe_plateformes);
-    this.physics.add.collider(groupe_burgers, groupe_plateformes);//
-    this.physics.add.collider(groupe_pommes, groupe_plateformes);
+    //this.physics.add.collider(groupe_salades, groupe_plateformes);
+    //this.physics.add.collider(groupe_sodas, groupe_plateformes);
+    //this.physics.add.collider(groupe_burgers, groupe_plateformes);//
+    //this.physics.add.collider(groupe_pommes, groupe_plateformes);
 
     groupe_salades.children.iterate(function(salade_i) {
         var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);      
@@ -450,7 +450,7 @@ function spawnItems() {
         burger_i.setBounceY(coef_rebond); // Appliquer le rebond
     });groupe_pommes.children.iterate(function(pomme_i) {
         var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
-        pomme_i_i.setBounceY(coef_rebond); // Appliquer le rebond
+        pomme_i.setBounceY(coef_rebond); // Appliquer le rebond
     });groupe_sodas.children.iterate(function(soda_i) {
         var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
         soda_i.setBounceY(coef_rebond); // Appliquer le rebond
@@ -511,6 +511,18 @@ function getRandomInt(max) {
  
     this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);  //Enlève le corps de la salade
  
+    function ramasserPomme(un_player, une_pomme){ //fonction pour ramasser les carottes
+ 
+      une_pomme.disableBody(true,true); //enlève la texture de la carotte
+ 
+      score += 40 ;
+ 
+    }//fin de la fonction ramasserCarotte
+ 
+
+ 
+    this.physics.add.overlap(player, groupe_pommes, ramasserPomme, null , this);
+    
     zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' }); //placement du score à ces coordonnées
  
 
@@ -640,7 +652,7 @@ function getRandomInt(max) {
     this.physics.add.overlap(player, groupe_bananes, ramasserBanane, null , this); //enlève le corps de la banane en appelant la fonction
  
 
- 
+    /*
     function ramasserBurger(un_player, un_burger){ //fonction pour ramasser les burgers
  
       un_burger.disableBody(true,true); //enlève la texture du burger
@@ -665,7 +677,7 @@ function getRandomInt(max) {
  
     //enlève le corps des burgers avec l'invocation de la fonction 
  
-
+    */
  
 
  
