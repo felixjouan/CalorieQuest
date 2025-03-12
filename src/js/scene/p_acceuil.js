@@ -46,7 +46,7 @@ export default class p_acceuil extends Phaser.Scene {
     //Cas ou la sourris clique sur le bouton play :
     // on lance le niveau 1
     bouton_play.on("pointerup", () => {
-      this.scene.start("niveau 1");
+      this.scene.start("niveau1");
     });
   }
 } 
