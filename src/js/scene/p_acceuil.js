@@ -17,10 +17,10 @@ export default class p_acceuil extends Phaser.Scene {
     // background.setPosition(this.cameras.main.centerX, this.cameras.main.centerY); // Positionner l'image au centre
 
     // on ajoute un bouton de clic, nommé bouton_play
-    var bouton_play = this.add.image(this.cameras.main.centerX, 450, "imageBoutonPlay").setDepth(1);
+    var bouton_play = this.add.image(this.cameras.main.centerX, 300, "imageBoutonPlay").setDepth(1);
 
     // Redimensionner le bouton si nécessaire pour ne pas qu'il soit trop gros
-    bouton_play.setScale(0.1); // Réduire la taille du bouton
+    bouton_play.setScale(1); // Réduire la taille du bouton
 
     //=========================================================
     //on rend le bouton interratif
