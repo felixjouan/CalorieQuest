@@ -31,6 +31,7 @@ export default class niveau1 extends Phaser.Scene {
     });
 
     this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte1");
+    this.porte_retour = this.physics.add.staticSprite(600,550,"img_porte1");
     const carteDuNiveau = this.make.tilemap({ key: "map1a" });
 
     // Chargement du jeu de tuiles

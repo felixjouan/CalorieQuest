@@ -75,37 +75,12 @@ var gameOver = false;
  
 
 var speed = 160; //variable pour changer la vitesse de déplacement du personnage
-
- 
-
 var speedjump = 330; //variable de la vitesse de saut 
-
- 
-
- 
-
- 
-
 var groupe_carrots; //groupe qui va contenir les carottes 
-
- 
-
 var groupe_sodas;
-
- 
-
 var groupe_bananes;
-
- 
-
 var groupe_burgers;
-
- 
-
 var groupe_redbulls;
-
- 
-
 var numItem;
 
  
@@ -159,15 +134,6 @@ function spawnItems() {
     }
 
   } //fin du for
-
- 
-
- 
-
- 
-
- 
-
 }//fin de la fonction spawnItems
 
  
@@ -191,12 +157,6 @@ export default class selection extends Phaser.Scene {
  
 
   }
-
- 
-
- 
-
- 
 
   /***********************************************************************/
 
@@ -260,65 +220,22 @@ export default class selection extends Phaser.Scene {
 
     });
 
- 
-
- 
-
     this.load.image("img_bombe", "src/assets/image/back.png");
-
- 
-
- 
-
- 
-
- 
 
     this.load.image("img_porte1", "src/assets/image/door1.png");
 
- 
-
     this.load.image("img_porte2", "src/assets/image/door2.png");
-
- 
 
     this.load.image("img_porte3", "src/assets/image/door3.png");
 
- 
-
- 
-
- 
-
     this.load.image("img_salada", "src/assets/image/food/salada.png");
-
- 
 
     this.load.image("img_carotte", "src/assets/image/food/carrot.png");
 
- 
-
     this.load.image("img_burger", "src/assets/image/food/burger.png");
 
- 
-
     this.load.image("img_banane", "src/assets/image/food/banana.png");
-
- 
-
- 
-
- 
-
- 
-
   }
-
- 
-
- 
-
- 
 
   /***********************************************************************/
 
@@ -330,11 +247,6 @@ export default class selection extends Phaser.Scene {
 
 /***********************************************************************/
 
- 
-
- 
-
- 
 
   /* La fonction create est appelée lors du lancement de la scene
 
@@ -342,41 +254,17 @@ export default class selection extends Phaser.Scene {
 
    * si on relance la scene, elle sera appelée a nouveau
 
- 
-
    * on y trouve toutes les instructions permettant de créer la scene
-
- 
 
    * placement des peronnages, des sprites, des platesformes, création des animations
 
- 
-
    * ainsi que toutes les instructions permettant de planifier des evenements
-
- 
 
    */
 
  
 
   create() {
-
- 
-
-    //fct.doNothing();
-
- 
-
-    //fct.doAlsoNothing();
-
- 
-
- 
-
- 
-
- 
 
     /*************************************
 
@@ -387,13 +275,6 @@ export default class selection extends Phaser.Scene {
  
 
      *************************************/
-
- 
-
- 
-
- 
-
     // On ajoute une simple image de fond, le ciel, au centre de la zone affichée (400, 300)
 
  
@@ -404,11 +285,6 @@ export default class selection extends Phaser.Scene {
 
     this.add.image(400, 300, "img_ciel");
 
- 
-
- 
-
- 
 
     // la création d'un groupes permet de gérer simultanément les éléments d'une meme famille
 
@@ -424,7 +300,6 @@ export default class selection extends Phaser.Scene {
 
     // ni de possibilité de les pousser.
 
- 
 
     groupe_plateformes = this.physics.add.staticGroup();
 
@@ -453,30 +328,16 @@ export default class selection extends Phaser.Scene {
     groupe_plateformes.create(600, 584, "img_plateforme");
 
  
-
- 
-
- 
-
     //  on ajoute 3 platesformes flottantes
 
  
 
     groupe_plateformes.create(600, 450, "img_plateforme");
 
- 
-
     groupe_plateformes.create(50, 300, "img_plateforme");
-
- 
 
     groupe_plateformes.create(750, 270, "img_plateforme");
 
- 
-
- 
-
- 
 
     /****************************
 
@@ -487,8 +348,6 @@ export default class selection extends Phaser.Scene {
  
 
      ****************************/
-
- 
 
     this.porte1 = this.physics.add.staticSprite(600, 414, "img_porte1");
 
@@ -540,15 +399,7 @@ export default class selection extends Phaser.Scene {
 
     player.setBounce(0.2); // on donne un petit coefficient de rebond
 
- 
-
     player.setCollideWorldBounds(true); // le player se cognera contre les bords du monde
-
- 
-
- 
-
- 
 
     /***************************
 
@@ -556,11 +407,7 @@ export default class selection extends Phaser.Scene {
 
      *  CREATION DES ANIMATIONS *
 
- 
-
      ****************************/
-
- 
 
     // dans cette partie, on crée les animations, à partir des spritesheet
 
@@ -576,123 +423,59 @@ export default class selection extends Phaser.Scene {
 
     // creation de l'animation "anim_tourne_gauche" qui sera jouée sur le player lorsque ce dernier tourne à gauche
 
- 
-
     this.anims.create({
-
- 
 
       key: "anim_tourne_gauche", // key est le nom de l'animation : doit etre unique poru la scene.
 
- 
-
       frames: this.anims.generateFrameNumbers("img_perso", {
-
- 
 
         start: 0,
 
- 
-
         end: 3
-
- 
 
       }), // on prend toutes les frames de img perso numerotées de 0 à 3
 
- 
-
       frameRate: 10, // vitesse de défilement des frames
-
- 
 
       repeat: -1 // nombre de répétitions de l'animation. -1 = infini
 
- 
-
     });
 
- 
-
- 
-
- 
-
- 
 
     // creation de l'animation "anim_tourne_face" qui sera jouée sur le player lorsque ce dernier n'avance pas.
 
- 
-
- 
-
     // creation de l'animation "anim_rester_droit" qui sera jouée sur le player lorsque ce dernier n'avance pas.
-
- 
 
     this.anims.create({
 
- 
-
- 
-
       key: "anim_face",
-
- 
-
- 
 
       key: "anim_rester_droit",
 
- 
-
       frames: [{ key: "img_perso", frame: 4 }],
-
- 
 
       frameRate: 20
 
- 
-
     });
-
- 
-
- 
 
  
 
     // creation de l'animation "anim_tourne_droite" qui sera jouée sur le player lorsque ce dernier tourne à droite
 
- 
-
     this.anims.create({
-
- 
 
       key: "anim_tourne_droite",
 
- 
 
       frames: this.anims.generateFrameNumbers("img_perso", {
 
- 
-
         start: 5,
-
- 
 
         end: 8
 
- 
-
       }),
 
- 
-
       frameRate: 10,
-
- 
 
       repeat: -1
 
@@ -702,18 +485,10 @@ export default class selection extends Phaser.Scene {
 
  
 
- 
-
- 
-
     /***********************
 
- 
 
      *  CREATION DU CLAVIER *
-
- 
-
      ************************/
 
  
@@ -724,32 +499,14 @@ export default class selection extends Phaser.Scene {
 
     clavier = this.input.keyboard.createCursorKeys();
 
- 
-
- 
-
- 
 
     keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
 
- 
-
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-
- 
 
     keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 
  
-
- 
-
- 
-
- 
-
- 
-
     /*****************************************************
 
  
@@ -760,23 +517,12 @@ export default class selection extends Phaser.Scene {
 
      ******************************************************/
 
- 
-
- 
-
- 
 
     //  Collide the player and the groupe_etoiles with the groupe_plateformes
 
  
 
     this.physics.add.collider(player, groupe_plateformes);
-
- 
-
- 
-
- 
 
     /**************************************************
 
@@ -787,16 +533,6 @@ export default class selection extends Phaser.Scene {
      
 
      **************************************************/
-
- 
-
- 
-
- 
-
- 
-
- 
 
     /*
 
@@ -953,13 +689,9 @@ export default class selection extends Phaser.Scene {
 
         });
 
- 
-
       }//fin du if()       
 
  
-
-
       score += 10; // A chaque fois que la fonction est exécutée le score est incrémenté de 10 
 
  
