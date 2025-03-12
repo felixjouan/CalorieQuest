@@ -48,6 +48,8 @@ export default class niveau2 extends Phaser.Scene {
 
     this.player = this.physics.add.sprite(100, 450, "img_perso");
     // Ajuster la boîte de collision du joueur pour de meilleurs déplacements
+    this.player.setScale(0.2);
+
     this.player.body.setSize(this.player.width * 0.7, this.player.height * 0.95);
     this.player.body.setOffset(5, 2);
     this.physics.add.collider(this.player, plateforme);
