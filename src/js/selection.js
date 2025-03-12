@@ -450,7 +450,7 @@ function spawnItems() {
         burger_i.setBounceY(coef_rebond); // Appliquer le rebond
     });groupe_pommes.children.iterate(function(pomme_i) {
         var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
-        pomme_i_i.setBounceY(coef_rebond); // Appliquer le rebond
+        pomme_i.setBounceY(coef_rebond); // Appliquer le rebond
     });groupe_sodas.children.iterate(function(soda_i) {
         var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
         soda_i.setBounceY(coef_rebond); // Appliquer le rebond
