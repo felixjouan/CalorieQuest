@@ -387,15 +387,16 @@ export default class selection extends Phaser.Scene {
 
     player = this.physics.add.sprite(100, 450, "img_perso");
 
- 
 
- 
-
- 
 
     //  propriétées physiqyes de l'objet player :
 
- 
+    player.setScale(0.2);
+    player.body.setSize(player.width * 0.7, player.height * 0.95);
+    player.body.setOffset(5, 2);
+    this.physics.add.collider(player,  groupe_plateformes) ;
+
+
 
     player.setBounce(0.2); // on donne un petit coefficient de rebond
 
