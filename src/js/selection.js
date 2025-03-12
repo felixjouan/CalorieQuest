@@ -522,7 +522,7 @@ function getRandomInt(max) {
 
  
     this.physics.add.overlap(player, groupe_pommes, ramasserPomme, null , this);
-    
+
     zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' }); //placement du score à ces coordonnées
  
 
