@@ -370,22 +370,20 @@ export default class selection extends Phaser.Scene {
 
  
 
-groupe_bananes = this.physics.add.group();
- 
-    this.physics.add.collider(groupe_bananes, groupe_plateformes); // ajoute les collisions entre les carottes et les plateformes
- 
-    groupe_sodas = this.physics.add.group() ;
- 
-    this.physics.add.collider(groupe_sodas, groupe_plateformes);
- 
-    groupe_redbulls = this.physics.add.group();
- 
-    this.physics.add.collider(groupe_redbulls,groupe_plateformes);
- 
-    groupe_carrots = this.physics.add.group();
 
-    //////////
+ 
     groupe_salades = this.physics.add.group();
+ 
+    //ajoute la physique aux salades 
+ 
+    for (var i = 0; i < 10; i++) {
+ 
+      var coordX = 70 + 70 * i;
+ 
+      groupe_salades.create(coordX, 10, "img_salada");
+ 
+    } 
+ 
     this.physics.add.collider(groupe_salades, groupe_plateformes); // ajoute les collisions entre les étoiles et les plateformes
  
     groupe_salades.children.iterate(function iterateur(salade_i) {
@@ -397,48 +395,6 @@ groupe_bananes = this.physics.add.group();
     salade_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond à l'étoile etoile_i
  
     }); 
-    //ajoute la physique aux salades 
- 
-    
-    ///////////////////////////////////////////////////////////////////////////////////
- 
-    var groupes = {
-      "soda": groupe_sodas,
-      "burger": groupe_burgers,
-      "banane": groupe_bananes,
-      "redbull": groupe_redbulls,
-      "carrotte": groupe_carrots,
-      "salade": groupe_salades
-  };
-  
-  // Liste des images associées à chaque groupe
-  var images = {
-      "soda": "img_soda",
-      "burger": "img_burger",
-      "banane": "img_banane",
-      "redbull": "img_redbull",
-      "carrotte": "img_carrotte",
-      "salade": "img_salade"
-  };
-  
-  for (var i = 0; i < 10; i++) {
-      var coordX = 70 + 70 * i;
-  
-      // Choisir un groupe aléatoirement
-      var groupeChoisi = Phaser.Utils.Array.GetRandom(Object.keys(groupes));
-  
-      // Créer l'objet avec l'image associée
-      var objet = groupes[groupeChoisi].create(coordX, 10, images[groupeChoisi]);
-  
-      // Ajouter un rebond aléatoire
-      var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
-      objet.setBounceY(coef_rebond);
-  }
-   
-
-    ///////////////////////////////////////////////////////////////////////////////// 
- 
-    
  
 
  
@@ -496,6 +452,9 @@ groupe_bananes = this.physics.add.group();
  
     zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' }); //placement du score à ces coordonnées
  
+
+ 
+    groupe_carrots = this.physics.add.group();
  
     this.physics.add.collider(groupe_carrots, groupe_plateformes); // ajoute les collisions entre les carottes et les plateformes
  
@@ -571,7 +530,18 @@ groupe_bananes = this.physics.add.group();
  
 
  
-    
+    groupe_bananes = this.physics.add.group();
+ 
+    this.physics.add.collider(groupe_bananes, groupe_plateformes); // ajoute les collisions entre les carottes et les plateformes
+ 
+    groupe_sodas = this.physics.add.group() ;
+ 
+    this.physics.add.collider(groupe_sodas, groupe_plateformes);
+ 
+    groupe_redbulls = this.physics.add.group();
+ 
+    this.physics.add.collider(groupe_redbulls,groupe_plateformes);
+ 
 
  
 
@@ -642,7 +612,7 @@ groupe_bananes = this.physics.add.group();
  
     function ramasserSoda(un_player, un_soda){ //fonction pour ramasser les sodas
  
-      un_burger.disableBody(true,true); //enlève la texture du soda
+      un_soda.disableBody(true,true); //enlève la texture du soda
  
       speed = 0.5*speed ; //on divise par 2 la vitesse de déplacement
  
@@ -656,7 +626,7 @@ groupe_bananes = this.physics.add.group();
  
       score -= 50 ;
  
-    }//fin de la fonction ramasserBurger
+    }//fin de la fonction ramasserSoda
  
     this.physics.add.overlap(player, groupe_sodas,ramasserSoda, null, this) ;
  
@@ -698,7 +668,16 @@ groupe_bananes = this.physics.add.group();
     //ajoute la physique aux burgers
  
 
-    
+    for (var i = 0; i < 10; i++) {
+ 
+
+      var coordX = 70 + 70 * i;
+ 
+
+      groupe_burgers.create(coordX, 10, "img_burger");
+ 
+
+    } 
  
 
     this.physics.add.collider(groupe_burgers, groupe_plateformes); // ajoute les collisions entre les burgers et les plateformes
@@ -717,6 +696,12 @@ groupe_bananes = this.physics.add.group();
  
 
     }); 
+ 
+
+ 
+
+ 
+
 
  
 
@@ -729,7 +714,10 @@ this.physics.add.overlap(player, groupe_burgers,ramasserBurger, null, this) ;
 groupe_sodas = this.physics.add.group();
 
 //ajoute la physique aux sodas
-
+for (var i = 0; i < 10; i++) {
+ var coordX = 50 + 70 * i;
+ groupe_burgers.create(coordX, 10, "img_soda");
+} 
 this.physics.add.collider(groupe_sodas, groupe_plateformes); // ajoute les collisions entre les sodas et les plateformes
 groupe_burgers.children.iterate(function iterateur(soda_i) {
 // On tire un coefficient aléatoire de rerebond : valeur entre 0.4 et 0.8
@@ -738,7 +726,15 @@ soda_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au soda 
 }); 
 
 
-
+function ramasserSoda(un_player, un_soda){ //fonction pour ramasser les sodas
+ un_burger.disableBody(true,true); //enlève la texture du soda
+ speed = 0.5*speed ; //on divise par 2 la vitesse de déplacement
+ setTimeout(() => {
+   speed = speed*2;
+ }, 5000); // 5000 pour  secondes
+ //La variable speed ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
+ score -= 50 ;
+}//fin de la fonction ramasserSoda
 this.physics.add.overlap(player, groupe_sodas,ramasserSoda, null, this) ;
 
 
@@ -747,7 +743,9 @@ this.physics.add.overlap(player, groupe_sodas,ramasserSoda, null, this) ;
 groupe_redbulls = this.physics.add.group();
 
 //ajoute la physique aux redbulls
-
+for (var i = 0; i < 10; i++) {
+ var coordX = 10 + 70 * i;
+ groupe_burgers.create(coordX, 10, "img_redbull");
 } 
 this.physics.add.collider(groupe_redbulls, groupe_plateformes); // ajoute les collisions entre les sodas et les plateformes
 groupe_burgers.children.iterate(function iterateur(redbull_i) {
@@ -876,7 +874,7 @@ this.physics.add.overlap(player, groupe_redbulls, ramasserRedbull, null, this);
  
   } // fin de la fonctoin update
  
-
+}
  
 
  
