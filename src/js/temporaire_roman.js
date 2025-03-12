@@ -42,7 +42,7 @@ this.physics.add.overlapp(player, groupe_burgers,ramasserBurger, null, this) ;
    //ajoute la physique aux sodas
    for (var i = 0; i < 10; i++) {
     var coordX = 50 + 70 * i;
-    groupe_burgers.create(coordX, 10, "img_coca");
+    groupe_burgers.create(coordX, 10, "img_soda");
   } 
   this.physics.add.collider(groupe_sodas, groupe_plateformes); // ajoute les collisions entre les sodas et les plateformes
   groupe_burgers.children.iterate(function iterateur(soda_i) {
