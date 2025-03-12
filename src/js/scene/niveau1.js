@@ -7,7 +7,7 @@ export default class niveau1 extends Phaser.Scene {
     });
   }
   preload() {
-  }
+  }//FIN DE LA FONCTION PRELOAD
 
   create() {
     //fct.doNothing();
@@ -31,7 +31,7 @@ export default class niveau1 extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
     this.clavier = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(this.player, this.groupe_plateformes);
-  }
+  } //fin de la fonction create
 
   update() {
     if (this.clavier.left.isDown) {
@@ -53,5 +53,5 @@ export default class niveau1 extends Phaser.Scene {
         this.scene.switch("selection");
       }
     }
-  }
+  }//fin de la fonction update
 }

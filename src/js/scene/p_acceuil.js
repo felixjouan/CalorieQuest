@@ -4,19 +4,23 @@ export default class p_acceuil extends Phaser.Scene {
   }
   //on charge les images
   preload() {
-    this.load.image("menu_fond", "/src/assets/image/imagemario.jpg");
-    this.load.image("imageBoutonPlay", "/src/assets/image/play-button.png");
+    this.load.image("menu_fond", "/src/assets/image/newpp.avif");
+    this.load.image("imageBoutonPlay", "/src/assets/image/button.png");
   }
 
   create() {
-    // on place les éléments de fond
-    this.add
-      .image(0, 0, "menu_fond")
-      .setOrigin(0)
-      .setDepth(0);
+    let background = this.add.image(0, 0, "menu_fond").setOrigin(0); // Positionnement en haut à gauche
+    background.setDisplaySize(this.cameras.main.width, this.cameras.main.height); // Redimensionner l'image pour couvrir toute la scène
 
-    //on ajoute un bouton de clic, nommé bouton_play
-    var bouton_play = this.add.image(300, 450, "imageBoutonPlay").setDepth(1);
+    // Si tu veux centrer le fond (en le redimensionnant pour couvrir l'écran) :
+    // background.setOrigin(0.5, 0.5); // Définir l'origine de l'image au centre
+    // background.setPosition(this.cameras.main.centerX, this.cameras.main.centerY); // Positionner l'image au centre
+
+    // on ajoute un bouton de clic, nommé bouton_play
+    var bouton_play = this.add.image(this.cameras.main.centerX, 450, "imageBoutonPlay").setDepth(1);
+
+    // Redimensionner le bouton si nécessaire pour ne pas qu'il soit trop gros
+    bouton_play.setScale(0.1); // Réduire la taille du bouton
 
     //=========================================================
     //on rend le bouton interratif
