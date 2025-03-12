@@ -420,10 +420,10 @@ function spawnItems() {
     var playerX = player.x;
     var playerY = player.y;
     for (var i = 0 ; i < 3 ; i++){
-        numItem = getRandomInt(4) ; //expecting 0,1,2,3
+        numItem = getRandomInt(7) ; //expecting 0,1,2,3,4,5,6
         var coordX = playerX - 70 + 70 * i; // Position en X (autour du joueur)
         var coordY = playerY - 200; // Position en Y (50 pixels au-dessus du joueur)
-        if (numItem == 0){
+        if (numItem == 0 || numItem == 4 || numItem == 5 || numItem == 6 ){
             groupe_salades.create(coordX, coordY, 'img_salade') ;
         }
         else if (numItem == 1){
