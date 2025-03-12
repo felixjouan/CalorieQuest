@@ -36,7 +36,7 @@ var gameOver = false;
 
 
 
-var speed = 160; //variable pour changer la vitesse de déplacement du personnage
+var speed = 550; //variable pour changer la vitesse de déplacement du personnage
 
 var speedjump = 330; //variable de la vitesse de saut 
 
@@ -454,7 +454,7 @@ export default class selection extends Phaser.Scene {
 
 
 
-    setInterval(spawnItems, 5000); //exécute la fo nction toute les 5 secondes
+    //setInterval(spawnItems, 5000); //exécute la fo nction toute les 5 secondes
 
 
 
@@ -509,7 +509,7 @@ export default class selection extends Phaser.Scene {
     this.physics.add.collider(groupe_carrots, groupe_plateformes); // ajoute les collisions entre les carottes et les plateformes
 
 
-
+    /*
     var une_carotte = groupe_carrots.create(100, 16, "img_carotte");
 
     une_carotte.setBounce(1);
@@ -519,6 +519,7 @@ export default class selection extends Phaser.Scene {
     une_carotte.setVelocity(Phaser.Math.Between(-200, 200), 20);
 
     une_carotte.allowGravity = false;
+    */
 
 
 
@@ -594,6 +595,7 @@ export default class selection extends Phaser.Scene {
 
 
 
+    /*
     var une_banane = groupe_bananes.create(100, 16, "img_banane");
 
     une_banane.setBounce(1);
@@ -603,7 +605,7 @@ export default class selection extends Phaser.Scene {
     une_banane.setVelocity(Phaser.Math.Between(-200, 200), 20);
 
     une_banane.allowGravity = false;
-
+    */
 
 
     function ramasserBanane(un_player, une_banane) {
