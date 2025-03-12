@@ -30,6 +30,8 @@ export default class niveau1 extends Phaser.Scene {
       fontSize: "22pt"
     });
 
+    this.player.setCollideWorldBounds(true);
+
     this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte1");
     this.porte_retour = this.physics.add.staticSprite(600,550,"img_porte1");
     const carteDuNiveau = this.make.tilemap({ key: "map1a" });
@@ -95,6 +97,10 @@ export default class niveau1 extends Phaser.Scene {
   }
 
   update() {
+
+    if (this.player.body.touching.left || this.player.body.touching.right || this.player.body.touching.top || this.player.body.touching.bottom) {
+      this.gameOver = true;
+    }
     if (this.clavier.left.isDown) {
       this.player.setVelocityX(-550);
       this.player.anims.play("anim_tourne_gauche", true);
