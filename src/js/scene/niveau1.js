@@ -1,5 +1,5 @@
 //import { spawnItems } from './selection';
-//import spawnItems from "/src/js/scene/selection";
+import {spawnItems} from "../selection.js";
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
   constructor() {
@@ -116,6 +116,7 @@ export default class niveau1 extends Phaser.Scene {
     
     }
 
+    /*
     function spawnItems() {
 
       //On récupère la position du joueur             
@@ -141,8 +142,10 @@ export default class niveau1 extends Phaser.Scene {
         }
       } //fin du for
     }//fin de la fonction spawnItems
+    */
 
 
+setInterval(spawnItems, 5000);
 
   }//fin de la fonction create
 

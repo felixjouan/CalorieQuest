@@ -41,9 +41,11 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-function spawnItems() {
+export function spawnItems() {
 
   //On récupère la position du joueur
+  var x;
+  var y;
   var playerX = player.x;
   var playerY = player.y;
   for (var i = 0; i < 3; i++) {
