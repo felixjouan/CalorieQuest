@@ -44,8 +44,10 @@ export default class niveau2 extends Phaser.Scene {
      const GATE = carteDuNiveau.createLayer("GATE", tileset3, 0, 0);
      const platf = carteDuNiveau.createLayer("platf", tileset, 0, 0);
 
+     //background.setOrigin(0.5, 0.5); // Définir l'origine de l'image au centre
 
-
+     background.setDisplaySize(this.cameras.main.width, this.cameras.main.height); // Redimensionner l'image pour couvrir toute la scène
+ 
      platf.setCollisionByProperty({ estSolide: true });
 
     this.player = this.physics.add.sprite(100, 450, "dude");
