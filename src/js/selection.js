@@ -41,33 +41,7 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-export function spawnItems() {
-
-  //On récupère la position du joueur
-  var x;
-  var y;
-  var playerX = player.x;
-  var playerY = player.y;
-  for (var i = 0; i < 3; i++) {
-
-    numItem = getRandomInt(4); //expecting 0,1,2,3
-    var coordX = playerX - 70 + 70 * i; // Position en X (autour du joueur)
-    var coordY = playerY - 50; // Position en Y (50 pixels au-dessus du joueur)
-
-    if (numItem == 0) {
-      groupe_salades.create(coordX, coordY, 'img_salade');
-    }
-    else if (numItem == 1) {
-      groupe_redbulls.create(coordX, coordY, 'img_redbull');
-    }
-    else if (numItem == 2) {
-      groupe_sodas.create(coordX, coordY, 'img_soda')
-    }
-    else if (numItem == 3) {
-      groupe_burgers.create(coordX, coordY, 'img_burger')
-    }
-  } //fin du for
-}//fin de la fonction spawnItems
+ 
 
 
 // définition de la classe "selection"
@@ -106,10 +80,14 @@ export default class selection extends Phaser.Scene {
     this.load.image("img_porte1", "src/assets/image/door1.png");
     this.load.image("img_porte2", "src/assets/image/door2.png");
     this.load.image("img_porte3", "src/assets/image/door3.png");
-    this.load.image("img_salada", "src/assets/image/food/salada.png");
+    this.load.image("img_salade", "src/assets/image/food/salada.png");
     this.load.image("img_carotte", "src/assets/image/food/carrot.png");
     this.load.image("img_burger", "src/assets/image/food/burger.png");
     this.load.image("img_banane", "src/assets/image/food/banana.png");
+    this.load.image("img_soda", "src/assets/image/food/coca.png");
+    this.load.image("img_redbull", "src/assets/image/food/redbull.png");
+
+
 
   } // Fin de la fonction preload
 
@@ -284,7 +262,7 @@ export default class selection extends Phaser.Scene {
       soda_i.setBounceY(coef_rebond); // Appliquer le rebond
     });
 
-    //setInterval(spawnItems, 5000); //exécute la fonnction toute les 5 secondes
+    setInterval(spawnItems, 5000); //exécute la fonnction toute les 5 secondes
 
     function ramasserSalade(un_player, une_salade) {
       une_salade.disableBody(true, true);
@@ -476,4 +454,36 @@ zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '
 
 /***********************************************************************/
 
- 
+function spawnItems() {
+
+  //On récupère la position du joueur
+  var x;
+  var y;
+  var playerX = player.x;
+  var playerY = player.y;
+  for (var i = 0; i < 2; i++) {
+
+    numItem = getRandomInt(5); //expecting 0,1,2,3
+    var coordX = playerX - 70 + 140 * i; // Position en X (autour du joueur)
+    var coordY = playerY - 50; // Position en Y (50 pixels au-dessus du joueur)
+
+    if (numItem == 0 || numItem == 1) {
+      groupe_salades.create(coordX, coordY, 'img_salade');
+    }
+    else if (numItem == 2) {
+      groupe_redbulls.create(coordX, coordY, 'img_redbull');
+    }
+    else if (numItem == 3) {
+      groupe_sodas.create(coordX, coordY, 'img_soda')
+    }
+    else if (numItem == 4) {
+      groupe_burgers.create(coordX, coordY, 'img_burger')
+    }
+    if (numItem == 5 || numItem == 6) {
+      groupe_carrots.create(coordX, coordY, 'img_simg_carrotte');
+    }
+    if (numItem == 0 || numItem == 8) {
+      groupe_bananes.create(coordX, coordY, 'img_banane');
+    }
+  } //fin du for
+}//fin de la fonction spawnItems

@@ -38,16 +38,10 @@ export default class niveau2 extends Phaser.Scene {
     const tileset1 = carteDuNiveau.addTilesetImage("enfer.jpg", "enfer");
     const tileset2 = carteDuNiveau.addTilesetImage("enfer1.jpg", "enfer1");
     const tileset3 = carteDuNiveau.addTilesetImage("gate.webp", "GATE");
-    const tilesets = tileset1 && tileset2;
     // Ajout des calques (ordre correct pour ne pas masquer les éléments)
-<<<<<<< HEAD
      const background = carteDuNiveau.createLayer("background", tileset1 && tileset2, 0, 0);
      const decors = carteDuNiveau.createLayer("decors", tileset, 0, 0);
-=======
-    const background = carteDuNiveau.createLayer("background", tilesets, 0, 0);
-    const decors = carteDuNiveau.createLayer("decors", tileset, 0, 0);
-     const GATE = carteDuNiveau.createLayer("GATE", tileset3, 0, 0);
->>>>>>> 36c8c05f7142613158790e4639c567ff297e7829
+
      const platf = carteDuNiveau.createLayer("platf", tileset, 0, 0);
 
 
