@@ -1,4 +1,4 @@
-import { spawnItems } from './selection';
+//import { spawnItems } from './selection';
 //import spawnItems from "/src/js/scene/selection";
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
@@ -109,7 +109,7 @@ export default class niveau1 extends Phaser.Scene {
       frameRate: 20
     });
 
-    setInterval(xspawnItems, 5000); //exécute la fonnction toute les 5 secondes
+    setInterval(spawnItems, 5000); //exécute la fonnction toute les 5 secondes
 
     function getRandomInt(max) {
       return Math.floor(Math.random() * max);
