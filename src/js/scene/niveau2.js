@@ -11,6 +11,13 @@ export default class niveau2 extends Phaser.Scene {
   this.load.image("portail", "src/assets/image/gate.webp");
   this.load.image("img_pomme", "src/assets/image/food/apple.png");
   this.load.image("enfer1", "src/assets/image/enfer1.jpg")
+  this.load.image("img_salade", "src/assets/image/food/salada.png");
+  this.load.image("img_carotte", "src/assets/image/food/carrot.png");
+  this.load.image("img_burger", "src/assets/image/food/burger.png");
+  this.load.image("img_banane", "src/assets/image/food/banana.png");
+  this.load.image("img_soda", "src/assets/image/food/coca.png");
+  this.load.image("img_redbull", "src/assets/image/food/redbull.png");
+
   this.load.tilemapTiledJSON("map1b", "src/assets/image/map1b.tmj");
   this.load.spritesheet("dude", "src/assets/image/ptitgars.png", {
      frameWidth: 184,

@@ -9,8 +9,10 @@ export default class niveau1 extends Phaser.Scene {
     });
   } //fin du constructeur
 
-
  
+  
+  
+  
 
   preload() {
     // chargement images
@@ -20,6 +22,13 @@ export default class niveau1 extends Phaser.Scene {
     this.load.image("portail", "src/assets/image/gate.webp");
     this.load.image("img_ciel", "src/assets/image/sky.png");
     this.load.image("img_pomme", "src/assets/image/food/apple.png");
+    this.load.image("img_salade", "src/assets/image/food/salada.png");
+    this.load.image("img_carotte", "src/assets/image/food/carrot.png");
+    this.load.image("img_burger", "src/assets/image/food/burger.png");
+    this.load.image("img_banane", "src/assets/image/food/banana.png");
+    this.load.image("img_soda", "src/assets/image/food/coca.png");
+    this.load.image("img_redbull", "src/assets/image/food/redbull.png");
+
     //this.load.image("img_ciel", "src/assets/image/sky.png");
     //this.load.image("img_ciel", "src/assets/image/sky.png");
 
@@ -38,6 +47,9 @@ export default class niveau1 extends Phaser.Scene {
   }
 
   create() {
+    
+    setInterval(spawnItems, 5000); //exécute la fonnction toute les 5 secondes
+
     // ajout d'un texte distintcif  du niveau
     //this.audioManager = new AudioManager(this);
     //this.audioManager.create();
@@ -124,6 +136,43 @@ export default class niveau1 extends Phaser.Scene {
     
     }
 
+    /**************************************************
+
+         * CREATION ET GESTION DES ALIMENTS*
+
+     **************************************************/
+    
+    
+    this.groupe_salades = this.physics.add.group();
+    this.groupe_burgers = this.physics.add.group();
+    this.groupe_sodas = this.physics.add.group();
+    this.groupe_redbulls = this.physics.add.group();
+    this.groupe_sodas = this.physics.add.group();
+    this.groupe_redbulls = this.physics.add.group();
+
+    this.physics.add.collider(this.groupe_salades, this.groupe_plateformes);
+    this.physics.add.collider(this.groupe_sodas, this.groupe_plateformes);
+    this.physics.add.collider(this.groupe_burgers, this.groupe_plateformes);
+    this.physics.add.collider(this.groupe_redbulls, this.groupe_plateformes);
+    this.physics.add.collider(this.groupe_sodas, this.groupe_plateformes);
+    this.physics.add.collider(this.groupe_redbulls,this.groupe_plateformes);
+
+    this.groupe_salades.children.iterate(function (salade_i) {
+      var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+      salade_i.setBounceY(coef_rebond); // Appliquer le rebond
+    });
+    this.groupe_burgers.children.iterate(function (burger_i) {
+      var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+      burger_i.setBounceY(coef_rebond); // Appliquer le rebond
+    }); 
+    this.groupe_redbulls.children.iterate(function (pomme_i) {
+      var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+      pomme_i_i.setBounceY(coef_rebond); // Appliquer le rebond
+    }); 
+    this.groupe_sodas.children.iterate(function (soda_i) {
+      var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
+      soda_i.setBounceY(coef_rebond); // Appliquer le rebond
+    });
     /*
     function spawnItems() {
 
@@ -190,3 +239,38 @@ export default class niveau1 extends Phaser.Scene {
     }
   }//fin de la fonction update
 }
+
+function spawnItems() {
+
+  //On récupère la position du joueur
+  /*var x;
+  var y;
+  var playerX = this.player.x;
+  var playerY = this.player.y;
+  */
+  for (var i = 0; i < 2; i++) {
+
+    numItem = getRandomInt(5); //expecting 0,1,2,3
+    var coordX = this.playerX - 70 + 140 * i; // Position en X (autour du joueur)
+    var coordY = this.playerY - 250; // Position en Y (50 pixels au-dessus du joueur)
+
+    if (numItem == 0 || numItem == 1) {
+      groupe_salades.create(coordX, coordY, 'img_salade');
+    }
+    else if (numItem == 2) {
+      groupe_redbulls.create(coordX, coordY, 'img_redbull');
+    }
+    else if (numItem == 3) {
+      groupe_sodas.create(coordX, coordY, 'img_soda')
+    }
+    else if (numItem == 4) {
+      groupe_burgers.create(coordX, coordY, 'img_burger')
+    }
+    if (numItem == 5 || numItem == 6) {
+      groupe_carrots.create(coordX, coordY, 'img_simg_carrotte');
+    }
+    if (numItem == 0 || numItem == 8) {
+      groupe_bananes.create(coordX, coordY, 'img_banane');
+    }
+  } //fin du for
+}//fin de la fonction spawnItems

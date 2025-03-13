@@ -465,7 +465,7 @@ function spawnItems() {
 
     numItem = getRandomInt(5); //expecting 0,1,2,3
     var coordX = playerX - 70 + 140 * i; // Position en X (autour du joueur)
-    var coordY = playerY - 50; // Position en Y (50 pixels au-dessus du joueur)
+    var coordY = playerY - 250; // Position en Y (50 pixels au-dessus du joueur)
 
     if (numItem == 0 || numItem == 1) {
       groupe_salades.create(coordX, coordY, 'img_salade');
