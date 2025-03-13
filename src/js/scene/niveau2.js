@@ -10,6 +10,7 @@ export default class niveau2 extends Phaser.Scene {
   this.load.image("enfer", "src/assets/image/enfer.jpg");
   this.load.image("GATE", "src/assets/image/gate.webp");
   this.load.image("img_pomme", "src/assets/image/food/apple.png");
+  this.load.image("enfer1", "src/assets/image/enfer1.jpg")
 
    // chargement de la carte
    this.load.tilemapTiledJSON("map1b", "src/assets/image/map1b.tmj");
@@ -37,10 +38,10 @@ export default class niveau2 extends Phaser.Scene {
     const tileset1 = carteDuNiveau.addTilesetImage("enfer.jpg", "enfer");
     const tileset2 = carteDuNiveau.addTilesetImage("enfer1.jpg", "enfer1");
     const tileset3 = carteDuNiveau.addTilesetImage("gate.webp", "GATE");
-
+    const tilesets = tileset1 && tileset2;
     // Ajout des calques (ordre correct pour ne pas masquer les éléments)
-     const background = carteDuNiveau.createLayer("background", tileset1 && tileset2, 0, 0);
-     const decors = carteDuNiveau.createLayer("decors", tileset, 0, 0);
+    const background = carteDuNiveau.createLayer("background", tilesets, 0, 0);
+    const decors = carteDuNiveau.createLayer("decors", tileset, 0, 0);
      const GATE = carteDuNiveau.createLayer("GATE", tileset3, 0, 0);
      const platf = carteDuNiveau.createLayer("platf", tileset, 0, 0);
 
@@ -69,26 +70,6 @@ export default class niveau2 extends Phaser.Scene {
     // Récupération des touches clavier
     this.clavier = this.input.keyboard.createCursorKeys();
 
-    // Animations du joueur
-    this.anims.create({
-      key: "anim_tourne_droite",
-      frames: this.anims.generateFrameNumbers("dude", { start: 12, end: 15 }),
-      frameRate: 10,
-      repeat: -1
-    });
-
-    this.anims.create({
-      key: "anim_tourne_gauche",
-      frames: this.anims.generateFrameNumbers("dude", { start: 8, end: 11 }),
-      frameRate: 10,
-      repeat: -1
-    });
-
-    this.anims.create({
-      key: "anim_face",
-      frames: [{ key: "dude", frame: 0 }],
-      frameRate: 20
-    });
   }
 
   update() {
