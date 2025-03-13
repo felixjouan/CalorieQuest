@@ -94,28 +94,46 @@ function getRandomInt(max) {
  
 
 function spawnItems() {
+function spawnItems() {
 
   //On récupère la position du joueur
+
   var playerX = player.x;
+
   var playerY = player.y;
+
   for (var i = 0; i < 3; i++) {
 
     numItem = getRandomInt(4); //expecting 0,1,2,3
+
     var coordX = playerX - 70 + 70 * i; // Position en X (autour du joueur)
+
     var coordY = playerY - 50; // Position en Y (50 pixels au-dessus du joueur)
 
     if (numItem == 0) {
+
       groupe_salades.create(coordX, coordY, 'img_salade');
+
     }
+
     else if (numItem == 1) {
+
       groupe_redbulls.create(coordX, coordY, 'img_redbull');
+
     }
+
     else if (numItem == 2) {
+
       groupe_sodas.create(coordX, coordY, 'img_soda')
+
     }
+
     else if (numItem == 3) {
+
       groupe_burgers.create(coordX, coordY, 'img_burger')
+
     }
+
   } //fin du for
 }//fin de la fonction spawnItems
 
@@ -130,32 +148,21 @@ function spawnItems() {
 export default class selection extends Phaser.Scene {
 
  
-
   constructor() {
-
  
 
     super({ key: "selection" }); // mettre le meme nom que le nom de la classe
 
- 
+
 
   }
 
   /***********************************************************************/
 
- 
-
   /** FONCTION PRELOAD 
-
- 
 
 /***********************************************************************/
 
- 
-
- 
-
- 
 
   /** La fonction preload est appelée une et une seule fois,
 
@@ -190,11 +197,11 @@ export default class selection extends Phaser.Scene {
 
  
 
-      frameWidth: 184,
+      frameWidth: 32,
 
  
 
-      frameHeight: 275
+      frameHeight: 48
 
  
 
@@ -247,11 +254,7 @@ export default class selection extends Phaser.Scene {
 
     /*************************************
 
- 
-
      *  CREATION DU MONDE + PLATEFORMES  *
-
- 
 
      *************************************/
     // On ajoute une simple image de fond, le ciel, au centre de la zone affichée (400, 300)
@@ -270,13 +273,7 @@ export default class selection extends Phaser.Scene {
  
 
     //  Le groupe groupe_plateformes contiendra le sol et deux platesformes sur lesquelles sauter
-
- 
-
     // notez le mot clé "staticGroup" : le static indique que ces élements sont fixes : pas de gravite,
-
- 
-
     // ni de possibilité de les pousser.
 
 
@@ -285,41 +282,22 @@ export default class selection extends Phaser.Scene {
  
 
     // une fois le groupe créé, on va créer les platesformes , le sol, et les ajouter au groupe groupe_plateformes
-
- 
-
     // l'image img_plateforme fait 400x32. On en met 2 à coté pour faire le sol
-
- 
-
     // la méthode create permet de créer et d'ajouter automatiquement des objets à un groupe
-
- 
-
     // on précise 2 parametres : chaque coordonnées et la texture de l'objet, et "voila!"
 
- 
 
     groupe_plateformes.create(200, 584, "img_plateforme");
-
- 
-
     groupe_plateformes.create(600, 584, "img_plateforme");
 
- 
     //  on ajoute 3 platesformes flottantes
 
- 
-
     groupe_plateformes.create(600, 450, "img_plateforme");
-
     groupe_plateformes.create(50, 300, "img_plateforme");
-
     groupe_plateformes.create(750, 270, "img_plateforme");
 
 
     /****************************
-
  
 
      *  Ajout des portes   *
@@ -330,18 +308,9 @@ export default class selection extends Phaser.Scene {
 
     this.porte1 = this.physics.add.staticSprite(600, 414, "img_porte1");
 
- 
-
     this.porte2 = this.physics.add.staticSprite(50, 264, "img_porte2");
 
- 
-
     this.porte3 = this.physics.add.staticSprite(750, 234, "img_porte3");
-
- 
-
- 
-
  
 
     /****************************
@@ -354,12 +323,6 @@ export default class selection extends Phaser.Scene {
 
      ****************************/
 
- 
-
- 
-
- 
-
     // On créée un nouveeau personnage : player
 
  
@@ -370,12 +333,7 @@ export default class selection extends Phaser.Scene {
 
     //  propriétées physiqyes de l'objet player :
 
-    player.setScale(0.2);
-    player.body.setSize(player.width * 0.7, player.height * 0.95);
-    player.body.setOffset(5, 2);
-    this.physics.add.collider(player,  groupe_plateformes) ;
-
-
+ 
 
     player.setBounce(0.2); // on donne un petit coefficient de rebond
 
@@ -409,9 +367,9 @@ export default class selection extends Phaser.Scene {
 
       frames: this.anims.generateFrameNumbers("img_perso", {
 
-        start: 8,
+        start: 0,
 
-        end: 11
+        end: 3
 
       }), // on prend toutes les frames de img perso numerotées de 0 à 3
 
@@ -432,7 +390,7 @@ export default class selection extends Phaser.Scene {
 
       key: "anim_rester_droit",
 
-      frames: [{ key: "img_perso", frame: 0 }],
+      frames: [{ key: "img_perso", frame: 4 }],
 
       frameRate: 20
 
@@ -449,21 +407,16 @@ export default class selection extends Phaser.Scene {
 
       frames: this.anims.generateFrameNumbers("img_perso", {
 
-        start: 12,
+        start: 5,
 
-        end: 15
+        end: 8
 
       }),
 
       frameRate: 10,
-
       repeat: -1
 
- 
-
     });
-
- 
 
     /***********************
 
@@ -471,77 +424,48 @@ export default class selection extends Phaser.Scene {
      *  CREATION DU CLAVIER *
      ************************/
 
- 
-
     // ceci permet de creer un clavier et de mapper des touches, connaitre l'état des touches
 
- 
 
     clavier = this.input.keyboard.createCursorKeys();
 
-
     keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
-
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-
     keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 
  
     /*****************************************************
 
- 
 
      *  GESTION DES INTERATIONS ENTRE  GROUPES ET ELEMENTS *
-
- 
 
      ******************************************************/
 
 
     //  Collide the player and the groupe_etoiles with the groupe_plateformes
 
- 
-
     this.physics.add.collider(player, groupe_plateformes);
 
     /**************************************************
 
-     
-
          * CREATION ET GESTION DES ALIMENTS*
 
-     
-
      **************************************************/
-
     /*
 
        groupe_salades = this.physics.add.group();
 
-    
-
        //ajoute la physique aux salades 
-
-    
 
        for (var i = 0; i < 10; i++) {
 
-    
-
          var coordX = 70 + 70 * i;
-
-    
 
          groupe_salades.create(coordX, 10, "img_salada");
 
-    
-
        } 
 
-    
-
        this.physics.add.collider(groupe_salades, groupe_plateformes); // ajoute les collisions entre les étoiles et les plateformes
-
     
 
        groupe_salades.children.iterate(function iterateur(salade_i) {
@@ -562,28 +486,19 @@ export default class selection extends Phaser.Scene {
 
        }); 
 
-    
-
    */
 
  
 
     groupe_salades = this.physics.add.group();
-
     groupe_burgers = this.physics.add.group();
-
     groupe_sodas = this.physics.add.group();
-
     groupe_redbulls = this.physics.add.group();
-
  
 
     this.physics.add.collider(groupe_salades, groupe_plateformes);
-
     this.physics.add.collider(groupe_sodas, groupe_plateformes);
-
     this.physics.add.collider(groupe_burgers, groupe_plateformes);
-
     this.physics.add.collider(groupe_redbulls, groupe_plateformes);
 
  
@@ -635,11 +550,7 @@ export default class selection extends Phaser.Scene {
 
       // les actions à entreprendre seront écrites dans la fonction ramasserSalade
 
- 
-
       //this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);
-
- 
 
       // on regarde le nombre de salades qui sont encore actives (non ramassées)
 
@@ -665,8 +576,6 @@ export default class selection extends Phaser.Scene {
 
           salade_i.enableBody(true, salade_i.x, 0, true, true);
 
- 
-
         });
 
       }//fin du if()       
@@ -674,16 +583,9 @@ export default class selection extends Phaser.Scene {
  
       score += 10; // A chaque fois que la fonction est exécutée le score est incrémenté de 10 
 
- 
-
       zone_texte_score.setText("Score: " + score); //Affichage du score 
 
- 
-
     }//fin de la fonction rammasserSalade
-
- 
-
  
 
     this.physics.add.overlap(player, groupe_salades, ramasserSalade, null, this);  //Enlève le corps de la salade
@@ -692,23 +594,13 @@ export default class selection extends Phaser.Scene {
 
     zone_texte_score = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' }); //placement du score à ces coordonnées
 
- 
-
- 
-
- 
-
     groupe_carrots = this.physics.add.group();
-
- 
 
     this.physics.add.collider(groupe_carrots, groupe_plateformes); // ajoute les collisions entre les carottes et les plateformes
 
  
 
     var une_carotte = groupe_carrots.create(100, 16, "img_carotte");
-
- 
 
     une_carotte.setBounce(1);
 
@@ -720,8 +612,6 @@ export default class selection extends Phaser.Scene {
 
     une_carotte.setVelocity(Phaser.Math.Between(-200, 200), 20);
 
- 
-
     une_carotte.allowGravity = false;
 
  
@@ -730,28 +620,11 @@ export default class selection extends Phaser.Scene {
  
 
       une_carotte.disableBody(true, true); //enlève la texture de la carotte
-
- 
-
       speedjump = 5 * speedjump; //on double la vitesse de saut
-
- 
-
-      //setTimeout(speedjump=speedjump/10 , 500000) ;
-
- 
-
       setTimeout(() => {
-
- 
-
         speedjump = speedjump / 5;
 
- 
-
       }, 5000); // 5000 pour  secondes
-
- 
 
       //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
 
@@ -763,11 +636,6 @@ export default class selection extends Phaser.Scene {
 
     }//fin de la fonction ramasserCarotte
 
- 
-
- 
-
- 
 
     this.physics.add.overlap(player, groupe_carrots, ramasserCarotte, null, this); //enlève le corps de la carotte
 
@@ -775,7 +643,6 @@ export default class selection extends Phaser.Scene {
 
     /*
 
- 
 
     groupe_burgers = this.physics.add.group();
 
@@ -789,17 +656,8 @@ export default class selection extends Phaser.Scene {
  
 
       var coordX = 70 + 70 * i;
-
- 
-
       groupe_burgers.create(coordX, 10, "img_burger");
-
- 
-
     } 
-
- 
-
     this.physics.add.collider(groupe_burgers, groupe_plateformes); // ajoute les collisions entre les burgers et les plateformes
 
  
@@ -814,74 +672,31 @@ export default class selection extends Phaser.Scene {
 
     var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
 
- 
-
     burger_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au burger burger_i
-
- 
 
     }); 
 
- 
-
     */
-
- 
-
- 
-
- 
 
     groupe_bananes = this.physics.add.group();
 
- 
-
     this.physics.add.collider(groupe_bananes, groupe_plateformes); // ajoute les collisions entre les carottes et les plateformes
-
- 
 
     groupe_sodas = this.physics.add.group();
 
- 
-
     this.physics.add.collider(groupe_sodas, groupe_plateformes);
 
- 
-
     groupe_redbulls = this.physics.add.group();
-
- 
 
     this.physics.add.collider(groupe_redbulls, groupe_plateformes);
 
  
-
- 
-
- 
-
     var une_banane = groupe_bananes.create(100, 16, "img_banane");
-
- 
-
     une_banane.setBounce(1);
-
- 
-
     une_banane.setCollideWorldBounds(true);
-
- 
-
     une_banane.setVelocity(Phaser.Math.Between(-200, 200), 20);
 
- 
-
     une_banane.allowGravity = false;
-
- 
-
- 
-
  
 
     function ramasserBanane(un_player, une_banane) {
@@ -889,24 +704,12 @@ export default class selection extends Phaser.Scene {
  
 
       une_banane.disableBody(true, true);
-
- 
-
       speed = 5 * speed;
-
- 
-
       setTimeout(() => {
-
- 
-
         speed = speed / 5;
-
- 
 
       }, 5000); // 5000 pour  millisecondes
 
- 
 
       //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
 
@@ -914,63 +717,22 @@ export default class selection extends Phaser.Scene {
 
       score += 20;
 
- 
-
- 
-
- 
-
     }//fin de la fonction ramasserBanane
 
  
 
     this.physics.add.overlap(player, groupe_bananes, ramasserBanane, null, this); //enlève le corps de la banane en appelant la fonction
 
- 
-
- 
-
- 
-
     function ramasserBurger(un_player, un_burger) { //fonction pour ramasser les burgers
-
- 
-
       un_burger.disableBody(true, true); //enlève la texture du burger
-
- 
-
       speedjump = 0.5 * speedjump; //on divise par 2 la vitesse de saut
-
- 
-
       //setTimeout(speedjump=speedjump/10 , 500000) ;
-
- 
-
       setTimeout(() => {
-
- 
-
         speedjump = speedjump * 2;
-
- 
-
       }, 5000); // 5000 pour  secondes
-
- 
-
       //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
-
- 
-
       score -= 50;
-
- 
-
     }//fin de la fonction ramasserBurger
-
- 
 
     this.physics.overlap(player, groupe_burgers, ramasserBurger, null, this);
 
@@ -978,349 +740,129 @@ export default class selection extends Phaser.Scene {
 
     //enlève le corps des burgers avec l'invocation de la fonction 
 
- 
-
- 
-
- 
-
- 
-
- 
 
     function ramasserSoda(un_player, un_soda) { //fonction pour ramasser les sodas
 
  
 
       un_soda.disableBody(true, true); //enlève la texture du soda
-
- 
-
       speed = 0.5 * speed; //on divise par 2 la vitesse de déplacement
-
- 
-
       setTimeout(() => {
-
- 
-
         speed = speed * 2;
-
- 
-
       }, 5000); // 5000 pour  secondes
-
- 
-
       //La variable speed ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
-
- 
-
       score -= 50;
-
- 
-
     }//fin de la fonction ramasserBurger
-
- 
-
     this.physics.add.overlap(player, groupe_sodas, ramasserSoda, null, this);
 
- 
-
- 
-
- 
-
- 
-
- 
 
     function ramasserRedbull(un_player, un_redbull) {
-
- 
-
       un_redbull.disableBody(true, true);
-
- 
-
       un_player.setVelocityY(-1500);
-
- 
-
       speedjump = 0.3 * speedjump;
-
- 
-
       setTimeout(() => {
-
- 
-
         speedjump = 10 * speedjump;
-
- 
-
         speedjump = speedjump / 3;
-
- 
-
       }, 5000);
 
- 
-
       score -= 1000
-
- 
-
       //La variable speedjump remise à sa valeur initiale au bout d'une certaine durée 
-
- 
 
     }//fin de la fonction ramasserRedbull
 
  
-
     this.physics.add.overlap(player, groupe_redbulls, ramasserRedbull, null, this);
 
  
-
- 
-
     groupe_burgers = this.physics.add.group();
 
- 
 
- 
-
- 
-
- 
-
- 
 
     //ajoute la physique aux burgers
-
- 
 
     /*
 
         for (var i = 0; i < 10; i++) {
 
      
-
-    
-
           var coordX = 70 + 70 * i;
 
-     
-
-    
-
           groupe_burgers.create(coordX, 10, "img_burger");
-
-     
-
-    
-
         } 
-
-     
-
-    
 
         this.physics.add.collider(groupe_burgers, groupe_plateformes); // ajoute les collisions entre les burgers et les plateformes
 
-     
-
-    
 
         groupe_burgers.children.iterate(function iterateur(burger_i) {
 
-     
-
-    
 
         // On tire un coefficient aléatoire de rerebond : valeur entre 0.4 et 0.8
 
-     
-
-    
 
         var coef_rebond = Phaser.Math.FloatBetween(0.4, 0.8);
 
-     
-
-    
-
         burger_i.setBounceY(coef_rebond); // on attribut le coefficient de rebond au burger burger_i
 
-     
-
-    
-
         }); 
-
-     
 
     */
 
  
-
- 
-
- 
-
- 
-
     function ramasserBurger(un_player, un_burger) { //fonction pour ramasser les burgers
 
  
 
- 
-
       un_burger.disableBody(true, true); //enlève la texture du burger
-
- 
-
- 
-
       speedjump = 0.5 * speedjump; //on divise par 2 la vitesse de saut
 
  
-
- 
-
       //setTimeout(speedjump=speedjump/10 , 500000) ;
-
- 
-
- 
-
       setTimeout(() => {
-
- 
-
- 
-
         speedjump = speedjump * 2;
-
- 
-
- 
-
       }, 5000); // 5000 pour  secondes
-
- 
-
- 
-
       //La variable speedjump ne va être remise à sa valeur initiale qu'après un retard de 5 secondes
-
- 
-
- 
-
       score -= 50;
-
- 
-
- 
-
     }//fin de la fonction ramasserBurger
 
  
-
- 
-
     this.physics.add.overlap(player, groupe_burgers, ramasserBurger, null, this);
-
- 
-
- 
-
- 
-
- 
 
   }//fin de la fonction create
 
  
-
- 
-
  
 
   /***********************************************************************/
 
- 
-
   /** FONCTION UPDATE 
-
- 
 
 /***********************************************************************/
 
  
 
- 
-
- 
-
   update() {
-
- 
-
- 
-
- 
 
     if (clavier.right.isDown == true) { //Si on appuie sur la flèche droite, on a une vitesse de 160 pixel par seconde 
 
- 
-
       player.setVelocityX(speed);
-
- 
-
       player.anims.play('anim_tourne_droite', true); //l'animation du sprite
-
- 
 
     }
 
- 
-
     else if (clavier.left.isDown == true) { //Si on appuie sur la flèche gauche, on a une vitesse de 160 pixel par seconde 
 
- 
-
       player.setVelocityX(-speed);
-
- 
-
       player.anims.play('anim_tourne_gauche', true); //l'animation du sprite
-
- 
-
     }
 
  
 
     else if (keyQ.isDown == true) { //Pour la touche Q 
 
- 
-
       player.setVelocityX(-speed);
-
- 
-
       player.anims.play('anim_tourne_gauche', true); //l'animation du sprite
 
- 
-
     }
-
- 
 
     else if (keyD.isDown == true) { //Pour la touche D
 
@@ -1331,24 +873,15 @@ export default class selection extends Phaser.Scene {
  
 
       player.anims.play('anim_tourne_droite', true); //l'animation du sprite
-
- 
-
     }
 
  
 
     else {
 
- 
-
       player.setVelocityX(0);
 
- 
-
       player.anims.play('anim_rester_droit');
-
- 
 
     }
 
@@ -1356,71 +889,31 @@ export default class selection extends Phaser.Scene {
 
     if (clavier.up.isDown == true && player.body.touching.down) { //pour la flèche du haut
 
- 
-
       player.setVelocityY(-speedjump) /*appliquer une velocite de -speedjump verticalement*/
-
- 
-
     }
-
- 
 
     if (keyZ.isDown == true && player.body.touching.down) { //pour la touche Z
 
- 
-
       player.setVelocityY(-speedjump) //appliquer une velocite de -speedjump verticalement
-
- 
 
     }
 
  
 
     if (score <= -1000) {
-
- 
-
       gameOver = true;
-
- 
-
     }
-
- 
 
     if (gameOver) {
-
- 
-
       return; //met gameOver à true 
-
- 
-
     }
 
- 
-
- 
-
- 
-
- 
-
- 
 
     if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) {
 
- 
-
       if (this.physics.overlap(player, this.porte1))
 
- 
-
         this.scene.switch("niveau1");
-
- 
 
       if (this.physics.overlap(player, this.porte2))
 
@@ -1428,39 +921,18 @@ export default class selection extends Phaser.Scene {
 
         this.scene.switch("niveau2");
 
- 
-
       if (this.physics.overlap(player, this.porte3))
-
- 
 
         this.scene.switch("niveau3");
 
- 
-
     }
-
- 
-
   }
-
- 
-
 }
 
- 
-
- 
-
- 
 
 /***********************************************************************/
 
- 
-
 /** CONFIGURATION GLOBALE DU JEU ET LANCEMENT 
-
- 
 
 /***********************************************************************/
 
