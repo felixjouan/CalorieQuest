@@ -257,11 +257,7 @@ export default class selection extends Phaser.Scene {
 
     /*************************************
 
- 
-
      *  CREATION DU MONDE + PLATEFORMES  *
-
- 
 
      *************************************/
     // On ajoute une simple image de fond, le ciel, au centre de la zone affichée (400, 300)
@@ -280,13 +276,7 @@ export default class selection extends Phaser.Scene {
  
 
     //  Le groupe groupe_plateformes contiendra le sol et deux platesformes sur lesquelles sauter
-
- 
-
     // notez le mot clé "staticGroup" : le static indique que ces élements sont fixes : pas de gravite,
-
- 
-
     // ni de possibilité de les pousser.
 
 
@@ -295,34 +285,18 @@ export default class selection extends Phaser.Scene {
  
 
     // une fois le groupe créé, on va créer les platesformes , le sol, et les ajouter au groupe groupe_plateformes
-
- 
-
     // l'image img_plateforme fait 400x32. On en met 2 à coté pour faire le sol
-
- 
-
     // la méthode create permet de créer et d'ajouter automatiquement des objets à un groupe
-
- 
-
     // on précise 2 parametres : chaque coordonnées et la texture de l'objet, et "voila!"
 
 
     groupe_plateformes.create(200, 584, "img_plateforme");
-
-
     groupe_plateformes.create(600, 584, "img_plateforme");
 
- 
     //  on ajoute 3 platesformes flottantes
 
- 
-
     groupe_plateformes.create(600, 450, "img_plateforme");
-
     groupe_plateformes.create(50, 300, "img_plateforme");
-
     groupe_plateformes.create(750, 270, "img_plateforme");
 
 
@@ -337,11 +311,7 @@ export default class selection extends Phaser.Scene {
 
     this.porte1 = this.physics.add.staticSprite(600, 414, "img_porte1");
 
- 
-
     this.porte2 = this.physics.add.staticSprite(50, 264, "img_porte2");
-
- 
 
     this.porte3 = this.physics.add.staticSprite(750, 234, "img_porte3");
  
@@ -447,10 +417,7 @@ export default class selection extends Phaser.Scene {
       }),
 
       frameRate: 10,
-
       repeat: -1
-
- 
 
     });
 
@@ -460,18 +427,13 @@ export default class selection extends Phaser.Scene {
      *  CREATION DU CLAVIER *
      ************************/
 
- 
-
     // ceci permet de creer un clavier et de mapper des touches, connaitre l'état des touches
 
 
     clavier = this.input.keyboard.createCursorKeys();
 
-
     keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
-
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-
     keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 
  
@@ -485,22 +447,16 @@ export default class selection extends Phaser.Scene {
 
     //  Collide the player and the groupe_etoiles with the groupe_plateformes
 
- 
-
     this.physics.add.collider(player, groupe_plateformes);
 
     /**************************************************
 
          * CREATION ET GESTION DES ALIMENTS*
 
-
      **************************************************/
-
     /*
 
        groupe_salades = this.physics.add.group();
-
-    
 
        //ajoute la physique aux salades 
 
@@ -538,21 +494,14 @@ export default class selection extends Phaser.Scene {
  
 
     groupe_salades = this.physics.add.group();
-
     groupe_burgers = this.physics.add.group();
-
     groupe_sodas = this.physics.add.group();
-
     groupe_redbulls = this.physics.add.group();
-
  
 
     this.physics.add.collider(groupe_salades, groupe_plateformes);
-
     this.physics.add.collider(groupe_sodas, groupe_plateformes);
-
     this.physics.add.collider(groupe_burgers, groupe_plateformes);
-
     this.physics.add.collider(groupe_redbulls, groupe_plateformes);
 
  
@@ -865,9 +814,6 @@ export default class selection extends Phaser.Scene {
  
 
       un_burger.disableBody(true, true); //enlève la texture du burger
-
- 
-
       speedjump = 0.5 * speedjump; //on divise par 2 la vitesse de saut
 
  
@@ -899,12 +845,7 @@ export default class selection extends Phaser.Scene {
 
     if (clavier.right.isDown == true) { //Si on appuie sur la flèche droite, on a une vitesse de 160 pixel par seconde 
 
- 
-
       player.setVelocityX(speed);
-
- 
-
       player.anims.play('anim_tourne_droite', true); //l'animation du sprite
 
     }
@@ -919,17 +860,10 @@ export default class selection extends Phaser.Scene {
 
     else if (keyQ.isDown == true) { //Pour la touche Q 
 
- 
-
       player.setVelocityX(-speed);
-
- 
-
       player.anims.play('anim_tourne_gauche', true); //l'animation du sprite
 
     }
-
- 
 
     else if (keyD.isDown == true) { //Pour la touche D
 
@@ -946,11 +880,7 @@ export default class selection extends Phaser.Scene {
 
     else {
 
- 
-
       player.setVelocityX(0);
-
- 
 
       player.anims.play('anim_rester_droit');
 
@@ -982,15 +912,9 @@ export default class selection extends Phaser.Scene {
 
     if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) {
 
- 
-
       if (this.physics.overlap(player, this.porte1))
 
- 
-
         this.scene.switch("niveau1");
-
- 
 
       if (this.physics.overlap(player, this.porte2))
 
@@ -999,8 +923,6 @@ export default class selection extends Phaser.Scene {
         this.scene.switch("niveau2");
 
       if (this.physics.overlap(player, this.porte3))
-
- 
 
         this.scene.switch("niveau3");
 
