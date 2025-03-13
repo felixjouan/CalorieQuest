@@ -6,9 +6,13 @@ export default class p_acceuil extends Phaser.Scene {
   preload() {
     this.load.image("menu_fond", "/src/assets/image/image_fond.png");
     this.load.image("imageBoutonPlay", "/src/assets/image/button.png");
+    this.load.audio("ascenseur_sound", "/src/assets/musique_ascenseur.mp3");
+
   }
 
   create() {
+    this.soundElevator = this.sound.add("ascenseur_sound", { loop: false, volume: 0.5 });
+    this.soundElevator.play();
     let background = this.add.image(0, 0, "menu_fond").setOrigin(0); // Positionnement en haut à gauche
     background.setDisplaySize(this.cameras.main.width, this.cameras.main.height); // Redimensionner l'image pour couvrir toute la scène
 

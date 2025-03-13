@@ -3,6 +3,7 @@ export default class AudioManager {
         this.scene = scene;
         this.sound1 = null;
         this.sound2 = null;
+        var sound ;
         this.soundElevator = null;
     }
 
@@ -15,8 +16,8 @@ export default class AudioManager {
 
     create() {
         
-        this.sound1 = this.sound.add("musique_1", { loop: true, volume: 0.5 });
-        this.sound2 = this.sound.add("sound3", { loop: true, volume: 0.5 });
+        this.sound1 = sound.add("musique_1", { loop: true, volume: 0.5 });
+        this.sound2 = sound.add("sound3", { loop: true, volume: 0.5 });
         this.sound_elevator=this.sound.add("ascenseur_sound", { loop: false, volume: 0.5 });
         
         this.sound_elevator.play();

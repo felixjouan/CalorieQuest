@@ -1,12 +1,13 @@
 //import { spawnItems } from './selection';
 //import spawnItems from "/src/js/scene/selection";
+
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
   constructor() {
     super({
       key: "niveau1" //  ici on précise le nom de la classe en tant qu'identifiant
     });
-  }
+  } //fin du constructeur
 
 
  
@@ -22,6 +23,8 @@ export default class niveau1 extends Phaser.Scene {
     //this.load.image("img_ciel", "src/assets/image/sky.png");
     //this.load.image("img_ciel", "src/assets/image/sky.png");
 
+    this.load.audio("musique_1", "/src/assets/globalmusique.mp3");
+
 
 
     // chargement de la carte
@@ -36,8 +39,10 @@ export default class niveau1 extends Phaser.Scene {
 
   create() {
     // ajout d'un texte distintcif  du niveau
-    this.audioManager = new AudioManager(this);
-this.audioManager.create();
+    //this.audioManager = new AudioManager(this);
+    //this.audioManager.create();
+
+
     this.add.text(400, 100, "Vous êtes dans le niveau 1", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
       fontSize: "22pt"
@@ -111,7 +116,7 @@ this.audioManager.create();
       frameRate: 20
     });
 
-    setInterval(spawnItems, 5000); //exécute la fonnction toute les 5 secondes
+    //setInterval(spawnItems, 5000); //exécute la fonnction toute les 5 secondes
 
     function getRandomInt(max) {
       return Math.floor(Math.random() * max);
@@ -147,7 +152,7 @@ this.audioManager.create();
     */
 
 
-setInterval(spawnItems, 5000);
+//setInterval(spawnItems, 5000);
 
   }//fin de la fonction create
 
