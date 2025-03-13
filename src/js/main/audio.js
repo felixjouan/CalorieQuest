@@ -7,17 +7,17 @@ export default class AudioManager {
     }
 
     preload() {
-        this.scene.load.audio("musique_1", "assets/globalmusique.mp3");
-        this.scene.load.audio("sound3", "assets/sound3.mp3");
-        this.scene.load.audio("ascenseur_sound", "assets/musique_ascenseur.mp3");
-        this.scene.load.audio("croc","assets/croc.mp3");
+        this.load.audio("musique_1", "/src/assets/globalmusique.mp3");
+        this.load.audio("sound3", "/src/assets/sound3.mp3");
+        this.load.audio("ascenseur_sound", "/src/assets/musique_ascenseur.mp3");
+        this.load.audio("croc","/src/assets/croc.mp3");
     }
 
     create() {
         
-        this.sound1 = this.scene.sound.add("musique_1", { loop: true, volume: 0.5 });
-        this.sound2 = this.scene.sound.add("sound3", { loop: true, volume: 0.5 });
-        this.sound_elevator=this.scene.sound.add("ascenseur_sound", { loop: false, volume: 0.5 });
+        this.sound1 = this.sound.add("musique_1", { loop: true, volume: 0.5 });
+        this.sound2 = this.sound.add("sound3", { loop: true, volume: 0.5 });
+        this.sound_elevator=this.sound.add("ascenseur_sound", { loop: false, volume: 0.5 });
         
         this.sound_elevator.play();
         

@@ -1,4 +1,5 @@
 // chargement des librairies
+import audio from "/src/js/main/audio.js";
 import p_acceuil from "/src/js/scene/p_acceuil.js";
 import niveau1 from "/src/js/scene/niveau1.js";
 import selection from "/src/js/selection.js";
@@ -21,7 +22,7 @@ var config = {
       debug: true // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
     }
   },
-  scene: [p_acceuil,niveau1, selection, niveau2, ]
+  scene: [audio,p_acceuil,niveau1, selection, niveau2, ]
 };
 
 // création et lancement du jeu

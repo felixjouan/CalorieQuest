@@ -1,5 +1,6 @@
 //import { spawnItems } from './selection';
 //import spawnItems from "/src/js/scene/selection";
+import AudioManager from "/src/js/main/audio.js";
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
   constructor() {
@@ -36,6 +37,8 @@ export default class niveau1 extends Phaser.Scene {
 
   create() {
     // ajout d'un texte distintcif  du niveau
+    this.audioManager = new AudioManager(this);
+this.audioManager.create();
     this.add.text(400, 100, "Vous êtes dans le niveau 1", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
       fontSize: "22pt"
