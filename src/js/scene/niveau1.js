@@ -41,7 +41,8 @@ export default class niveau1 extends Phaser.Scene {
     // ajout d'un texte distintcif  du niveau
     //this.audioManager = new AudioManager(this);
     //this.audioManager.create();
-
+    this.musiquego = this.sound.add("musique_1", { loop: false, volume: 0.5 });
+    this.musiquego.play();
 
     this.add.text(400, 100, "Vous êtes dans le niveau 1", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
@@ -183,6 +184,7 @@ export default class niveau1 extends Phaser.Scene {
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
       if (this.physics.overlap(this.player, this.portes)) {
+        this.musiquego.stop(); 
         this.scene.switch("selection");
       }
     }
