@@ -7,12 +7,21 @@ export default class niveau1 extends Phaser.Scene {
       key: "niveau1" //  ici on précise le nom de la classe en tant qu'identifiant
     });
   }
+
+
+ 
+
   preload() {
     // chargement images
     this.load.image("tjc", "src/assets/image/tuilesJeu copie.png");
     this.load.image("grotte", "src/assets/image/grotte.jpg");
     this.load.image("fond", "src/assets/image/back.png");
     this.load.image("portail", "src/assets/image/gate.webp");
+    this.load.image("img_ciel", "src/assets/image/sky.png");
+    this.load.image("img_pomme", "src/assets/image/apple.png");
+    //this.load.image("img_ciel", "src/assets/image/sky.png");
+    //this.load.image("img_ciel", "src/assets/image/sky.png");
+
 
 
     // chargement de la carte
@@ -100,7 +109,39 @@ export default class niveau1 extends Phaser.Scene {
       frameRate: 20
     });
 
-    setInterval(this.spawnItems, 5000); //exécute la fonnction toute les 5 secondes
+    setInterval(xspawnItems, 5000); //exécute la fonnction toute les 5 secondes
+
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    
+    }
+
+    function spawnItems() {
+
+      //On récupère la position du joueur             
+      var playerX = this.player.x ;    
+      var playerY = this.player.y ;    
+      for (var i = 0; i < 3; i++) {
+    
+        numItem = getRandomInt(4); //expecting 0,1,2,3
+        var coordX = playerX - 70 + 70 * i; // Position en X (autour du joueur)
+        var coordY = playerY - 50; // Position en Y (50 pixels au-dessus du joueur)
+    
+        if (numItem == 0) {
+          groupe_salades.create(coordX, coordY, 'img_salade');
+        }
+        else if (numItem == 1) {
+          groupe_redbulls.create(coordX, coordY, 'img_redbull');
+        }
+        else if (numItem == 2) {
+          groupe_sodas.create(coordX, coordY, 'img_soda')
+        }
+        else if (numItem == 3) {
+          groupe_burgers.create(coordX, coordY, 'img_burger')
+        }
+      } //fin du for
+    }//fin de la fonction spawnItems
+
 
 
   }//fin de la fonction create
