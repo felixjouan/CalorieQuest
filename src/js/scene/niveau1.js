@@ -1,6 +1,5 @@
 //import { spawnItems } from './selection';
 //import spawnItems from "/src/js/scene/selection";
-import AudioManager from "/src/js/main/audio.js";
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
   constructor() {
@@ -119,6 +118,7 @@ this.audioManager.create();
     
     }
 
+    /*
     function spawnItems() {
 
       //On récupère la position du joueur             
@@ -144,8 +144,10 @@ this.audioManager.create();
         }
       } //fin du for
     }//fin de la fonction spawnItems
+    */
 
 
+setInterval(spawnItems, 5000);
 
   }//fin de la fonction create
 
