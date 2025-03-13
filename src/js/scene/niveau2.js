@@ -8,7 +8,7 @@ export default class niveau2 extends Phaser.Scene {
   preload() {
   this.load.image("tjc", "src/assets/image/tuilesJeu copie.png");
   this.load.image("enfer", "src/assets/image/enfer.jpg");
-  this.load.image("GATE", "src/assets/image/gate.webp");
+  this.load.image("portail", "src/assets/image/gate.webp");
   this.load.image("img_pomme", "src/assets/image/food/apple.png");
 
    // chargement de la carte
@@ -28,7 +28,7 @@ export default class niveau2 extends Phaser.Scene {
       fontSize: "22pt"
     });
 
-    this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte2");//TVG    
+    
     const carteDuNiveau = this.make.tilemap({ key: "map1b" });
 
     // Chargement du jeu de tuiles
@@ -41,8 +41,11 @@ export default class niveau2 extends Phaser.Scene {
     // Ajout des calques (ordre correct pour ne pas masquer les éléments)
      const background = carteDuNiveau.createLayer("background", tileset1 && tileset2, 0, 0);
      const decors = carteDuNiveau.createLayer("decors", tileset, 0, 0);
-     const GATE = carteDuNiveau.createLayer("GATE", tileset3, 0, 0);
      const platf = carteDuNiveau.createLayer("platf", tileset, 0, 0);
+
+
+     this.porte_retour = this.physics.add.staticGroup();
+     this.porte_retour.create(100, 550, "portail"); 
 
      //background.setOrigin(0.5, 0.5); // Définir l'origine de l'image au centre
 
