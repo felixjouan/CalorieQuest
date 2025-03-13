@@ -8,8 +8,8 @@ export default class niveau2 extends Phaser.Scene {
   preload() {
   this.load.image("tjc", "src/assets/image/tuilesJeu copie.png");
   this.load.image("enfer", "src/assets/image/enfer.jpg");
-  this.load.image("enfer1", "src/assets/image/enfer1.jpg");
-  this.load.image("portail", "src/assets/image/gate.webp");
+  this.load.image("GATE", "src/assets/image/gate.webp");
+  this.load.image("img_pomme", "src/assets/image/food/apple.png");
 
    // chargement de la carte
    this.load.tilemapTiledJSON("map1b", "src/assets/image/map1b.tmj");
@@ -33,26 +33,28 @@ export default class niveau2 extends Phaser.Scene {
 
     // Chargement du jeu de tuiles
     // Utiliser le nom exact correspondant au tileset dans votre fichier TMJ
-    const tileset = carteDuNiveau.addTilesetImage("tuilesdejeu copie.png", "tjc");
+    const tileset = carteDuNiveau.addTilesetImage("tuilesJeu copie.png", "tjc");
     const tileset1 = carteDuNiveau.addTilesetImage("enfer.jpg", "enfer");
     const tileset2 = carteDuNiveau.addTilesetImage("enfer1.jpg", "enfer1");
-    const tileset3 = carteDuNiveau.addTilesetImage("gate.webp", "portail");
+    const tileset3 = carteDuNiveau.addTilesetImage("gate.webp", "GATE");
 
     // Ajout des calques (ordre correct pour ne pas masquer les éléments)
-     const back = carteDuNiveau.createLayer("background", tileset1&&tileset2, 0, 0);
-     const cave = carteDuNiveau.createLayer("platf", tileset, 0, 0);
+     const background = carteDuNiveau.createLayer("background", tileset1 && tileset2, 0, 0);
      const decors = carteDuNiveau.createLayer("decors", tileset, 0, 0);
-     const portail = carteDuNiveau.createLayer("portail", tileset3, 0, 0);
+     const GATE = carteDuNiveau.createLayer("GATE", tileset3, 0, 0);
+     const platf = carteDuNiveau.createLayer("platf", tileset, 0, 0);
+
+
 
      platf.setCollisionByProperty({ estSolide: true });
 
-    this.player = this.physics.add.sprite(100, 450, "img_perso");
+    this.player = this.physics.add.sprite(100, 450, "dude");
     // Ajuster la boîte de collision du joueur pour de meilleurs déplacements
     this.player.setScale(0.2);
 
     this.player.body.setSize(this.player.width * 0.7, this.player.height * 0.95);
     this.player.body.setOffset(5, 2);
-    this.physics.add.collider(this.player, plateforme);
+    this.physics.add.collider(this.player, platf);
 
     // Redimensionnement du monde
     this.physics.world.setBounds(0, 0, carteDuNiveau.widthInPixels, carteDuNiveau.heightInPixels);
@@ -98,11 +100,10 @@ export default class niveau2 extends Phaser.Scene {
       this.player.setVelocityX(0);
       this.player.anims.play("anim_face");
     }
-    if (this.clavier.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-350);
+    if (this.clavier.up.isDown && this.player.body.blocked.down) {
+      this.player.setVelocityY(-400);
     }
-
-    if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
+if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
       if (this.physics.overlap(this.player, this.porte_retour)) {
         console.log("niveau 3 : retour vers selection");
         this.scene.switch("selection");

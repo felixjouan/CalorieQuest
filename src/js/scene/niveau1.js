@@ -19,7 +19,7 @@ export default class niveau1 extends Phaser.Scene {
     this.load.image("fond", "src/assets/image/back.png");
     this.load.image("portail", "src/assets/image/gate.webp");
     this.load.image("img_ciel", "src/assets/image/sky.png");
-    this.load.image("img_pomme", "src/assets/image/apple.png");
+    this.load.image("img_pomme", "src/assets/image/food/apple.png");
     //this.load.image("img_ciel", "src/assets/image/sky.png");
     //this.load.image("img_ciel", "src/assets/image/sky.png");
 
