@@ -18,6 +18,8 @@ export default class niveau2 extends Phaser.Scene {
   this.load.image("img_soda", "src/assets/image/food/coca.png");
   this.load.image("img_redbull", "src/assets/image/food/redbull.png");
 
+  this.load.audio("musique_2", "/src/assets/sound3.mp3");
+
   this.load.tilemapTiledJSON("map1b", "src/assets/image/map1b.tmj");
   this.load.spritesheet("dude", "src/assets/image/ptitgars.png", {
      frameWidth: 184,
@@ -31,6 +33,9 @@ export default class niveau2 extends Phaser.Scene {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
       fontSize: "22pt"
     });
+
+    this.musiquedark = this.sound.add("musique_2", { loop: false, volume: 0.5 });
+    this.musiquedark.play();
 
     
     const carteDuNiveau = this.make.tilemap({ key: "map1b" });
@@ -80,10 +85,10 @@ export default class niveau2 extends Phaser.Scene {
 
   update() {
     if (this.clavier.left.isDown) {
-      this.player.setVelocityX(-160);
+      this.player.setVelocityX(-300);
       this.player.anims.play("anim_tourne_gauche", true);
     } else if (this.clavier.right.isDown) {
-      this.player.setVelocityX(160);
+      this.player.setVelocityX(300);
       this.player.anims.play("anim_tourne_droite", true);
     } else {
       this.player.setVelocityX(0);
@@ -92,8 +97,12 @@ export default class niveau2 extends Phaser.Scene {
     if (this.clavier.up.isDown && this.player.body.blocked.down) {
       this.player.setVelocityY(-400);
     }
+    if (this.clavier.down.isDown) {
+      this.player.setVelocityY(400);
+    }
 if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
       if (this.physics.overlap(this.player, this.porte_retour)) {
+        this.musiquedark.stop(); 
         console.log("niveau 3 : retour vers selection");
         this.scene.switch("selection");
       }

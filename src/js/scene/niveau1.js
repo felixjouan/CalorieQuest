@@ -1,6 +1,18 @@
 //import { spawnItems } from './selection';
 //import spawnItems from "/src/js/scene/selection";
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+var numItem;
 
+var x;
+var y;
+
+//On récupère la position du joueur
+  var x;
+  var y;
+  
+  
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
   constructor() {
@@ -10,7 +22,6 @@ export default class niveau1 extends Phaser.Scene {
   } //fin du constructeur
 
  
-  
   
   
 
@@ -203,7 +214,38 @@ export default class niveau1 extends Phaser.Scene {
 
 
 //setInterval(spawnItems, 5000);
+function spawnItems() {
 
+  //On récupère la position du joueur
+ 
+  var playerX = this.playerx;
+  var playerY = this.playery;
+  for (var i = 0; i < 2; i++) {
+
+    numItem = getRandomInt(5); //expecting 0,1,2,3
+    var coordX = playerX - 70 + 140 * i; // Position en X (autour du joueur)
+    var coordY = playerY - 250; // Position en Y (50 pixels au-dessus du joueur)
+
+    if (numItem == 0 || numItem == 1) {
+      this.groupe_salades.create(this.coordX, this.coordY, 'img_salade');
+    }
+    else if (numItem == 2) {
+      this.groupe_redbulls.create(this.coordX, this.coordY, 'img_redbull');
+    }
+    else if (numItem == 3) {
+      this.groupe_sodas.create(coordX, coordY, 'img_soda')
+    }
+    else if (numItem == 4) {
+      this.groupe_burgers.create(coordX, coordY, 'img_burger')
+    }
+    if (numItem == 5 || numItem == 6) {
+      this.groupe_carrots.create(coordX, coordY, 'img_simg_carrotte');
+    }
+    if (numItem == 0 || numItem == 8) {
+      this.groupe_bananes.create(coordX, coordY, 'img_banane');
+    }
+  } //fin du for
+}//fin de la fonction spawnItems
   }//fin de la fonction create
 
   update() {
@@ -240,37 +282,3 @@ export default class niveau1 extends Phaser.Scene {
   }//fin de la fonction update
 }
 
-function spawnItems() {
-
-  //On récupère la position du joueur
-  /*var x;
-  var y;
-  var playerX = this.player.x;
-  var playerY = this.player.y;
-  */
-  for (var i = 0; i < 2; i++) {
-
-    numItem = getRandomInt(5); //expecting 0,1,2,3
-    var coordX = this.playerX - 70 + 140 * i; // Position en X (autour du joueur)
-    var coordY = this.playerY - 250; // Position en Y (50 pixels au-dessus du joueur)
-
-    if (numItem == 0 || numItem == 1) {
-      groupe_salades.create(coordX, coordY, 'img_salade');
-    }
-    else if (numItem == 2) {
-      groupe_redbulls.create(coordX, coordY, 'img_redbull');
-    }
-    else if (numItem == 3) {
-      groupe_sodas.create(coordX, coordY, 'img_soda')
-    }
-    else if (numItem == 4) {
-      groupe_burgers.create(coordX, coordY, 'img_burger')
-    }
-    if (numItem == 5 || numItem == 6) {
-      groupe_carrots.create(coordX, coordY, 'img_simg_carrotte');
-    }
-    if (numItem == 0 || numItem == 8) {
-      groupe_bananes.create(coordX, coordY, 'img_banane');
-    }
-  } //fin du for
-}//fin de la fonction spawnItems
