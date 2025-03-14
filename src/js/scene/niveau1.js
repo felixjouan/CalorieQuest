@@ -214,38 +214,7 @@ export default class niveau1 extends Phaser.Scene {
 
 
 //setInterval(spawnItems, 5000);
-function spawnItems() {
 
-  //On récupère la position du joueur
- 
-  var playerX = this.playerx;
-  var playerY = this.playery;
-  for (var i = 0; i < 2; i++) {
-
-    numItem = getRandomInt(5); //expecting 0,1,2,3
-    var coordX = playerX - 70 + 140 * i; // Position en X (autour du joueur)
-    var coordY = playerY - 250; // Position en Y (50 pixels au-dessus du joueur)
-
-    if (numItem == 0 || numItem == 1) {
-      this.groupe_salades.create(this.coordX, this.coordY, 'img_salade');
-    }
-    else if (numItem == 2) {
-      this.groupe_redbulls.create(this.coordX, this.coordY, 'img_redbull');
-    }
-    else if (numItem == 3) {
-      this.groupe_sodas.create(coordX, coordY, 'img_soda')
-    }
-    else if (numItem == 4) {
-      this.groupe_burgers.create(coordX, coordY, 'img_burger')
-    }
-    if (numItem == 5 || numItem == 6) {
-      this.groupe_carrots.create(coordX, coordY, 'img_simg_carrotte');
-    }
-    if (numItem == 0 || numItem == 8) {
-      this.groupe_bananes.create(coordX, coordY, 'img_banane');
-    }
-  } //fin du for
-}//fin de la fonction spawnItems
   }//fin de la fonction create
 
   update() {
@@ -279,6 +248,18 @@ function spawnItems() {
         this.scene.switch("selection");
       }
     }
+    if (this.player.y > this.physics.world.bounds.height) {
+      this.player.setY(this.physics.world.bounds.height - 50); // Replace le joueur sur le sol
+      this.player.setVelocityY(0); // Arrête la chute
+    }
+    if (this.player.body.blocked.down) {
+      this.lastSafePosition.x = this.player.x;
+      this.lastSafePosition.y = this.player.y;
+    }
+    if (this.player.y > this.physics.world.bounds.height) {
+      this.player.setPosition(this.lastSafePosition.x, this.lastSafePosition.y); // Ramène le joueur au dernier sol
+    }
+    
   }//fin de la fonction update
 }
 
